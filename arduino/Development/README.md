@@ -1,4 +1,4 @@
-## To Change WiFi Credentials for your Arduino
+## Setup WiFi Credentials for your Arduino
 - Add a file called WiFi_Login.cpp in this directory
 - Go to WiFi_Login.cpp file and add the code below
 - Change the WIFI_SSID string to your WIFI Name
