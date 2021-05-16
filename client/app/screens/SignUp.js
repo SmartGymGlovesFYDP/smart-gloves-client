@@ -10,6 +10,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+
 import { registration } from "../api/firebaseMethods";
 
 export default function SignUp({ navigation }) {
