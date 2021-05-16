@@ -6,6 +6,7 @@ import routes from "../navigation/routes";
 import colors from "../config/colors";
 import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
+import Screen from "../components/Screen";
 
 function WelcomeScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -26,11 +27,10 @@ function WelcomeScreen({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Smart Gloves</Text>
       </View>
-
       <View style={styles.contentContainer}>
         <View style={styles.buttonsContainer}>
           <Text style={styles.text}>Sign In Below!</Text>
@@ -41,7 +41,6 @@ function WelcomeScreen({ navigation }) {
             onChangeText={(email) => setEmail(email)}
             autoCapitalize="none"
           />
-
           <TextInput
             style={styles.textInput}
             placeholder="Enter your password"
@@ -58,7 +57,7 @@ function WelcomeScreen({ navigation }) {
           />
         </View>
       </View>
-    </View>
+    </Screen>
   );
 }
 
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     position: "absolute",
-    top: 170,
+    top: 120,
   },
   title: {
     fontSize: 35,
