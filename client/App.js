@@ -7,38 +7,8 @@ import SignUp from "./app/screens/SignUp";
 import SignIn from "./app/screens/SignIn";
 import Loading from "./app/screens/Loading";
 import Dashboard from "./app/screens/Dashboard";
-
-const Stack = createStackNavigator();
+import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
-  if (!firebase.apps.length) {
-    firebase.initializeApp(apiKeys.firebaseConfig);
-  }
-
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name={"Loading"}
-          component={Loading}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Sign Up"
-          component={SignUp}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Sign In"
-          component={SignIn}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name={"Dashboard"}
-          component={Dashboard}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  return <WelcomeScreen />;
 }

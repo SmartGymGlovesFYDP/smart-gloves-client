@@ -16,17 +16,17 @@ function AppButton({ title, onPress, color = "primary" }) {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
-    borderRadius: 25,
+    borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
-    padding: 15,
+    padding: 5,
     width: "100%",
-    marginVertical: 10,
+    margin: "5%",
+    borderColor: colors.white,
   },
   text: {
     color: colors.white,
-    fontSize: 18,
-    textTransform: "uppercase",
+    fontSize: 20,
     fontWeight: "bold",
   },
 });
