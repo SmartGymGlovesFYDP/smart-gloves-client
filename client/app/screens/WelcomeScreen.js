@@ -5,6 +5,7 @@ import { signIn } from "../api/firebaseMethods";
 import routes from "../navigation/routes";
 import colors from "../config/colors";
 import AppButton from "../components/AppButton";
+import AppTextInput from "../components/AppTextInput";
 
 function WelcomeScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -40,6 +41,7 @@ function WelcomeScreen({ navigation }) {
             onChangeText={(email) => setEmail(email)}
             autoCapitalize="none"
           />
+
           <TextInput
             style={styles.textInput}
             placeholder="Enter your password"

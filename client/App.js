@@ -10,5 +10,9 @@ import Dashboard from "./app/screens/Dashboard";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 export default function App() {
+  if (!firebase.apps.length) {
+    firebase.initializeApp(apiKeys.firebaseConfig);
+  }
+
   return <WelcomeScreen />;
 }
