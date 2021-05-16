@@ -2,11 +2,11 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as firebase from "firebase";
-import apiKeys from "./config/keys";
-import SignUp from "./screens/SignUp";
-import SignIn from "./screens/SignIn";
-import Loading from "./screens/Loading";
-import Dashboard from "./screens/Dashboard";
+import apiKeys from "./app/config/keys";
+import SignUp from "./app/screens/SignUp";
+import SignIn from "./app/screens/SignIn";
+import Loading from "./app/screens/Loading";
+import Dashboard from "./app/screens/Dashboard";
 
 const Stack = createStackNavigator();
 
