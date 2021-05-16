@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
-import { AppForm, AppFormField, SubmitButton } from "../components/forms";
-import * as Yup from "yup";
 
 import { signIn } from "../api/firebaseMethods";
 import routes from "../navigation/routes";
@@ -9,12 +7,6 @@ import colors from "../config/colors";
 import AppButton from "../components/AppButton";
 import AppTextInput from "../components/AppTextInput";
 import Screen from "../components/Screen";
-
-const validationSchema = Yup.object().shape({
-  name: Yup.string().required().label("Name"),
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Password"),
-});
 
 function WelcomeScreen({ navigation }) {
   const [email, setEmail] = useState("");
@@ -39,39 +31,6 @@ function WelcomeScreen({ navigation }) {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Smart Gloves</Text>
       </View>
-      <AppForm
-        initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={(values) => console.log(values)}
-        validationSchema={validationSchema}
-      >
-        <AppFormField
-          name="name"
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="account"
-          placeholder="Name"
-          textContentType="name"
-        />
-        <AppFormField
-          name="email"
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <AppFormField
-          name="password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="lock"
-          placeholder="Password"
-          secureTextEntry={true}
-          textContentType="password"
-        />
-        <SubmitButton title="Register" />
-      </AppForm>
       <View style={styles.contentContainer}>
         <View style={styles.buttonsContainer}>
           <Text style={styles.text}>Sign In Below!</Text>
