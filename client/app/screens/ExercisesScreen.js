@@ -12,18 +12,27 @@ const exercises = [
     title: "Bicep Curls",
     rating: 4.5,
     image: require("../assets/bicep-curl.jpeg"),
+    minutes: 10,
+    sets: 12,
+    reps: 10,
   },
   {
     id: 2,
     title: "Jumping Jacks",
-    rating: 4.2,
+    rating: 3.5,
     image: require("../assets/jumping-jack.jpeg"),
+    minutes: 15,
+    sets: 6,
+    reps: 15,
   },
   {
     id: 3,
     title: "Bench Press",
-    rating: 3.7,
+    rating: 5,
     image: require("../assets/dumbbell-bench-press.jpeg"),
+    minutes: 18,
+    sets: 8,
+    reps: 12,
   },
 ];
 
@@ -36,8 +45,11 @@ function ExercisesScreen({ navigation }) {
         renderItem={({ item }) => (
           <Card
             title={item.title}
-            subTitle={item.rating}
+            rating={item.rating}
             image={item.image}
+            minutes={item.minutes}
+            sets={item.sets}
+            reps={item.reps}
             onPress={() => navigation.navigate(routes.EXERCISE_DETAILS, item)}
           />
         )}
@@ -49,7 +61,7 @@ function ExercisesScreen({ navigation }) {
 const styles = StyleSheet.create({
   screen: {
     padding: 20,
-    backgroundColor: colors.light,
+    backgroundColor: colors.white,
   },
 });
 
