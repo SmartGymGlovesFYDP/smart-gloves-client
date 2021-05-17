@@ -2,6 +2,8 @@
 #include <Arduino_LSM6DS3.h>
 #include <ArduinoJson.h>
 
+#define CHARACTERISTIC_LENGTH 77
+
 // BLE IMU Service
 // UUID: 2A5D -> "Sensor Location"
 // To see assigned 16-bit UUIDs:
@@ -14,8 +16,8 @@ BLEService IMUService("2A5D");
 // Note: Maximum characteristic packet size is 512 bytes
 // For more info on BLE services & characteristics:
 // https://www.arduino.cc/en/Reference/ArduinoBLEBLECharacteristicBLECharacteristic
-BLEStringCharacteristic accelChar("190313ee-5f69-489f-a812-b93eeb413329", BLERead | BLENotify, 8 + 64);
-BLEStringCharacteristic gyroChar("ed131e76-3d4f-4fd9-b8f9-fba0bc580ee8", BLERead | BLENotify, 8 + 64);
+BLEStringCharacteristic accelChar("190313ee-5f69-489f-a812-b93eeb413329", BLERead | BLENotify, CHARACTERISTIC_LENGTH);
+BLEStringCharacteristic gyroChar("ed131e76-3d4f-4fd9-b8f9-fba0bc580ee8", BLERead | BLENotify, CHARACTERISTIC_LENGTH);
 
 // Variables for storing previous accelerometer readings
 float ax_old = 0;
@@ -136,21 +138,21 @@ void updateIMUReadings() {
   if (IMU.accelerationAvailable()) {
     IMU.readAcceleration(ax, ay, az);
     // DEBUG INFO: Transmit accelerometer readings to serial monitor for debugging purposes
-    Serial.print(ax);
-    Serial.print('\t');
-    Serial.print(ay);
-    Serial.print('\t');
-    Serial.println(az);
+//    Serial.print(ax);
+//    Serial.print('\t');
+//    Serial.print(ay);
+//    Serial.print('\t');
+//    Serial.println(az);
   }
 
   if(IMU.gyroscopeAvailable()) {
     IMU.readGyroscope(gx, gy, gz);
     // DEBUG INFO: Transmit gyroscope readings to serial monitor for debugging purposes
-    Serial.print(gx);
-    Serial.print('\t');
-    Serial.print(gy);
-    Serial.print('\t');
-    Serial.println(gz);
+//    Serial.print(gx);
+//    Serial.print('\t');
+//    Serial.print(gy);
+//    Serial.print('\t');
+//    Serial.println(gz);
   }
 
 
@@ -158,22 +160,38 @@ void updateIMUReadings() {
  *  any of the readings have changed.
  *  
  *  Size of JSON is determined as follows:
-      - timestamp -> float = 16 bytes
+      - timestamp -> string = 9 bytes
       - coordinates (x,y,z) -> float*3 = 48 bytes
-      - Total = 64 bytes = JSON_OBJECT_SIZE(4)
+      - Total = 73 bytes
  */
+  unsigned long currentMillis = millis();
+  unsigned long seconds = currentMillis / 1000;
+  unsigned long minutes = seconds / 60;
+  unsigned long hours = minutes / 60;
+  currentMillis %= 1000;
+  seconds %= 60;
+  minutes %= 60;
+  hours %= 24;
+
+  String ms = currentMillis > 10? (currentMillis > 100? String(currentMillis) : "0" + String(currentMillis)) : "00" + String(currentMillis);
+  String secs = seconds > 10? String(seconds) : "0" + String(seconds);
+  String mins = minutes > 10? String(minutes) : "0" + String(minutes);
+  String hrs = hours > 10? String(hours) : "0" + String(hours);
+  String time_string = hrs + ':' + mins + ':' + secs + ':' + ms;
+  
   if(ax != ax_old || ay != ay_old || az != az_old) {
     ax_old = ax;
     ay_old = ay;
     az_old = az;
 
-    StaticJsonDocument<JSON_OBJECT_SIZE(4)> doc;
+    StaticJsonDocument<CHARACTERISTIC_LENGTH> doc;
     doc["x"] = ax;
     doc["y"] = ay;
     doc["z"] = az;
+    doc["timestamp"] = time_string;
 
-    char buf[64];
-    serializeJson(doc, buf, 64);
+    char buf[CHARACTERISTIC_LENGTH];
+    serializeJson(doc, buf, CHARACTERISTIC_LENGTH);
     accelChar.writeValue(buf);
   }
   if(gx != gx_old || gy != gy_old || gz != gz_old) {
@@ -181,13 +199,14 @@ void updateIMUReadings() {
     gy_old = gy;
     gz_old = gz;
 
-    StaticJsonDocument<JSON_OBJECT_SIZE(4)> doc;
+    StaticJsonDocument<CHARACTERISTIC_LENGTH> doc;
     doc["x"] = gx;
     doc["y"] = gy;
     doc["z"] = gz;
+    doc["timestamp"] = time_string;
 
-    char buf[64];
-    serializeJson(doc, buf, 64);
+    char buf[CHARACTERISTIC_LENGTH];
+    serializeJson(doc, buf, CHARACTERISTIC_LENGTH);
     gyroChar.writeValue(buf);
   }
 }
