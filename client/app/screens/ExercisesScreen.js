@@ -34,6 +34,24 @@ const exercises = [
     sets: 8,
     reps: 12,
   },
+  {
+    id: 4,
+    title: "Advance Bicep Curls",
+    rating: 1.5,
+    image: require("../assets/bicep-curl.jpeg"),
+    minutes: 30,
+    sets: 10,
+    reps: 20,
+  },
+  {
+    id: 5,
+    title: "Jumping Jacks Superset",
+    rating: 4.5,
+    image: require("../assets/jumping-jack.jpeg"),
+    minutes: 65,
+    sets: 5,
+    reps: 5,
+  },
 ];
 
 function ExercisesScreen({ navigation }) {
