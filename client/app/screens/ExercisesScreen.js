@@ -54,10 +54,10 @@ const exercises = [
   },
 ];
 
-export default function ExerciseScreen({ navigation }) {
+export default function ExercisesScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
-      <Text style={styles.title}>Exercise Screen</Text>
+      <Text style={styles.title}>Exercises</Text>
       <FlatList
         data={exercises}
         keyExtractor={(exercise) => exercise.id.toString()}

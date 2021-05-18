@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 import * as firebase from "firebase";
 import { FirebaseContext } from "../api/FirebaseProvider";
@@ -42,12 +41,11 @@ export default function ProfileScreen({ navigation }) {
 
   const handlePress = () => {
     signOut();
-    // navigation.replace(PATH.SIGNIN);
   };
 
   return (
     <Screen style={styles.screen}>
-      <Text style={styles.title}>Profile Screen</Text>
+      <Text style={styles.title}>My Profile</Text>
       <Text style={styles.text}>
         Hi {firstName} {lastName}!
       </Text>

@@ -4,10 +4,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../config/colors";
 import Screen from "../components/Screen";
 
-export default function SearchScreen({ navigation }) {
+export default function MyProgressScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
-      <Text style={styles.title}>Search Screen</Text>
+      <Text style={styles.title}>My Progress</Text>
     </Screen>
   );
 }

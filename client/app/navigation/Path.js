@@ -6,11 +6,11 @@ export default Object.freeze({
   // Post-Authorization Routes
   // Tab 1: Home Screen
   HOME: "Home",
-  // Tab 2: Exercise Screen
-  EXERCISE: "Exercise",
+  // Tab 2: MyProgress Screen
+  MYPROGRESS: "Progress",
+  // Tab 3: Exercise Screen
+  EXERCISES: "Exercises",
   EXERCISE_DETAILS: "ExerciseDetails",
-  // Tab 3: Search Screen
-  SEARCH: "Search",
   // Tab 4: Profile Screen
   PROFILE: "Profile",
   PROFILE_EDIT: "ProfileEdit",

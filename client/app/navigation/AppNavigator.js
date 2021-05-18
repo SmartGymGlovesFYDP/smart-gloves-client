@@ -7,11 +7,11 @@ import colors from "../config/colors";
 import PATH from "./Path";
 // Tab 1: Home Screen and child screens
 import HomeScreen from "../screens/HomeScreen";
-// Tab 2: Exercise Screen and child screens
-import ExerciseScreen from "../screens/ExerciseScreen";
+// Tab 2: My Progress Screen and child screens
+import MyProgressScreen from "../screens/MyProgressScreen";
+// Tab 3: Exercise Screen and child screens
+import ExercisesScreen from "../screens/ExercisesScreen";
 import ExerciseDetailsScreen from "../screens/ExerciseDetailsScreen";
-// Tab 3: Search Screen and child screens
-import SearchScreen from "../screens/SearchScreen";
 // Tab 4: Profile Screen and child screens
 import ProfileScreen from "../screens/ProfileScreen";
 import ProfileEditScreen from "../screens/ProfileEditScreen";
@@ -30,27 +30,27 @@ const HomeStack = ({ navigation }) => (
   </Stack.Navigator>
 );
 
-const ExerciseStack = ({ navigation }) => (
-  <Stack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
+const MyProgressStack = ({ navigation }) => (
+  <Stack.Navigator>
     <Stack.Screen
-      name={PATH.EXERCISE}
-      component={ExerciseScreen}
+      name={PATH.MYPROGRESS}
+      component={MyProgressScreen}
       options={{ headerShown: false }}
-    />
-    <Stack.Screen
-      name={PATH.EXERCISE_DETAILS}
-      component={ExerciseDetailsScreen}
     />
     {/* ADD MORE SCREENS AS NECESSARY */}
   </Stack.Navigator>
 );
 
-const SearchStack = ({ navigation }) => (
-  <Stack.Navigator>
+const ExercisesStack = ({ navigation }) => (
+  <Stack.Navigator mode="modal" screenOptions={{ headerShown: false }}>
     <Stack.Screen
-      name={PATH.SEARCH}
-      component={SearchScreen}
+      name={PATH.EXERCISES}
+      component={ExercisesScreen}
       options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={PATH.EXERCISE_DETAILS}
+      component={ExerciseDetailsScreen}
     />
     {/* ADD MORE SCREENS AS NECESSARY */}
   </Stack.Navigator>
@@ -90,8 +90,8 @@ function AppNavigator() {
         }}
       />
       <Tab.Screen
-        name={PATH.EXERCISE}
-        component={ExerciseStack}
+        name={PATH.MYPROGRESS}
+        component={MyProgressStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="dumbbell" color={color} size={size} />
@@ -99,8 +99,8 @@ function AppNavigator() {
         }}
       />
       <Tab.Screen
-        name={PATH.SEARCH}
-        component={SearchStack}
+        name={PATH.EXERCISES}
+        component={ExercisesStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
