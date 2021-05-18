@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
+import colors from "../config/colors";
 import PATH from "./Path";
 // Tab 1: Home Screen and child screens
 import HomeScreen from "../screens/HomeScreen";
@@ -65,16 +66,7 @@ const ProfileStack = ({ navigation }) => (
     <Stack.Screen
       name={PATH.PROFILE_EDIT}
       component={ProfileEditScreen}
-      options={{
-        headerTitle: "Edit Profile",
-        headerBackTitleVisible: false,
-        headerTitleAlign: "center",
-        headerStyle: {
-          backgroundColor: "#fff",
-          shadowColor: "#fff",
-          elevation: 0,
-        },
-      }}
+      options={{ headerShown: false }}
     />
     {/* ADD MORE SCREENS AS NECESSARY */}
   </Stack.Navigator>
@@ -85,7 +77,7 @@ function AppNavigator() {
     <Tab.Navigator
       initialRouteName={PATH.HOME}
       tabBarOptions={{
-        activeTintColor: "#2e64e5",
+        activeTintColor: colors.primary,
       }}
     >
       <Tab.Screen

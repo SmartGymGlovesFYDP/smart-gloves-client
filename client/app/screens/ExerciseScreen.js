@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, Text } from "react-native";
 
 import Card from "../components/Card";
 import Screen from "../components/Screen";
@@ -57,6 +57,7 @@ const exercises = [
 export default function ExerciseScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
+      <Text style={styles.title}>Exercise Screen</Text>
       <FlatList
         data={exercises}
         keyExtractor={(exercise) => exercise.id.toString()}
@@ -81,5 +82,10 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: colors.white,
   },
+  title: {
+    fontSize: 35,
+    fontWeight: "bold",
+    color: colors.black,
+    textAlign: "center",
+  },
 });
-
