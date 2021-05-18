@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import * as firebase from "firebase";
-import { loggingOut } from "../api/firebaseMethods";
+import { FirebaseContext } from "../api/FirebaseProvider";
+import PATH from "../navigation/Path";
 
-export default function Dashboard({ navigation }) {
+export default function ProfileScreen({ navigation }) {
   let currentUserUID = firebase.auth().currentUser.uid;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+
+  const { signOut } = useContext(FirebaseContext);
 
   useEffect(() => {
     async function getUserInfo() {
@@ -36,21 +39,21 @@ export default function Dashboard({ navigation }) {
   });
 
   const handlePress = () => {
-    loggingOut();
-    navigation.replace("Home");
+    signOut();
+    // navigation.replace(PATH.SIGNIN);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}>Dashboard</Text>
+        <Text style={styles.title}>Profile Screen</Text>
       </View>
       <Text style={styles.text}>
         Hi {firstName} {lastName}!
       </Text>
       <Text style={styles.text}>Email: {email}</Text>
       <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Text style={styles.buttonText}>Log Out</Text>
+        <Text style={styles.buttonText}>Sign Out</Text>
       </TouchableOpacity>
     </View>
   );

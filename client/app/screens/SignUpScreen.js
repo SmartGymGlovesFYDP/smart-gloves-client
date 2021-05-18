@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   View,
   Text,
@@ -11,14 +11,17 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { registration } from "../api/firebaseMethods";
+import { FirebaseContext } from "../api/FirebaseProvider";
+import PATH from "../navigation/Path";
 
-export default function SignUp({ navigation }) {
+export default function SignUpScreen({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const { signUpWithEmail } = useContext(FirebaseContext);
 
   const emptyState = () => {
     setFirstName("");
@@ -41,8 +44,7 @@ export default function SignUp({ navigation }) {
     } else if (password !== confirmPassword) {
       Alert.alert("Password does not match!");
     } else {
-      registration(email, password, lastName, firstName);
-      navigation.navigate("Loading");
+      signUpWithEmail(email, password, lastName, firstName);
       emptyState();
     }
   };
@@ -100,7 +102,7 @@ export default function SignUp({ navigation }) {
             <Text style={styles.inlineText}>Have an account?</Text>
             <TouchableOpacity
               style={styles.signin_button}
-              onPress={() => navigation.navigate("Sign In")}
+              onPress={() => navigation.navigate(PATH.SIGNIN)}
             >
               <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>

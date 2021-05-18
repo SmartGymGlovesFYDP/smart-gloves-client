@@ -4,7 +4,7 @@ import { FlatList, StyleSheet } from "react-native";
 import Card from "../components/Card";
 import Screen from "../components/Screen";
 import colors from "../config/colors";
-import routes from "../navigation/routes";
+import PATH from "../navigation/Path";
 
 const exercises = [
   {
@@ -54,7 +54,7 @@ const exercises = [
   },
 ];
 
-function ExercisesScreen({ navigation }) {
+export default function ExerciseScreen({ navigation }) {
   return (
     <Screen style={styles.screen}>
       <FlatList
@@ -68,7 +68,7 @@ function ExercisesScreen({ navigation }) {
             minutes={item.minutes}
             sets={item.sets}
             reps={item.reps}
-            onPress={() => navigation.navigate(routes.EXERCISE_DETAILS, item)}
+            onPress={() => navigation.navigate(PATH.EXERCISE_DETAILS, item)}
           />
         )}
       />
@@ -83,4 +83,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExercisesScreen;

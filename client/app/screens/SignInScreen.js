@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-import { signIn } from "../api/firebaseMethods";
+import { FirebaseContext } from "../api/FirebaseProvider";
+import PATH from "../navigation/Path";
 
-export default function SignIn({ navigation }) {
+export default function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { signInWithEmail } = useContext(FirebaseContext);
 
   const handlePress = () => {
     if (!email) {
@@ -17,7 +20,7 @@ export default function SignIn({ navigation }) {
       Alert.alert("Password field is required.");
     }
 
-    signIn(email, password);
+    signInWithEmail(email, password);
     setEmail("");
     setPassword("");
   };
@@ -53,7 +56,7 @@ export default function SignIn({ navigation }) {
         <Text style={styles.inlineText}>Don't have an account?</Text>
         <TouchableOpacity
           style={styles.signup_button}
-          onPress={() => navigation.navigate("Sign Up")}
+          onPress={() => navigation.navigate(PATH.SIGNUP)}
         >
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
