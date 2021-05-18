@@ -18,7 +18,9 @@ function Card({ title, rating, image, minutes, sets, reps, onPress }) {
         <View style={styles.detailsContainer}>
           <View style={styles.general}>
             <AppText style={styles.title}>{title}</AppText>
-            <Rating rated={rating} size={15} ratingColor={colors.base} />
+            {rating && (
+              <Rating rated={rating} size={15} ratingColor={colors.base} />
+            )}
           </View>
           <View style={styles.exerciseDetails}>
             <AppText style={styles.exerciseDetailsText}>
