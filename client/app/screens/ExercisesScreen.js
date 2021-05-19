@@ -3,10 +3,9 @@ import { FlatList, StyleSheet } from "react-native";
 
 import Card from "../components/Card";
 import Screen from "../components/Screen";
-import AppTextInput from "../components/AppTextInput";
+import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
-import AppSearchBar from "../components/AppSearchBar";
 
 const exercises = [
   {
@@ -89,9 +88,7 @@ function ExercisesScreen({ navigation }) {
 
   return (
     <Screen style={styles.screen}>
-      <AppTextInput
-        icon="magnify"
-        fontSize={5}
+      <AppSearchBar
         placeholder="Discover your next workout! ..."
         onChangeText={(text) => searchFilterFunction(text)}
         onClear={(text) => searchFilterFunction("")}
