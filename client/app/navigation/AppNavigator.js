@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
-import PATH from "./path";
+import PATH from "./Path";
 // Tab 1: Home Screen and child screens
 import HomeScreen from "../screens/HomeScreen";
 // Tab 2: My Progress Screen and child screens

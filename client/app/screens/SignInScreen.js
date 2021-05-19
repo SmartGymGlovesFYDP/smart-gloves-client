@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { FirebaseContext } from "../api/FirebaseProvider";
-import PATH from "../navigation/path";
+import PATH from "../navigation/Path";
 
 export default function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
