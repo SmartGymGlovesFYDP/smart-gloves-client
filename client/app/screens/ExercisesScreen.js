@@ -5,7 +5,7 @@ import Card from "../components/Card";
 import Screen from "../components/Screen";
 import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
-import routes from "../navigation/routes";
+import PATH from "../navigation/Path";
 
 const exercises = [
   {
@@ -105,7 +105,7 @@ function ExercisesScreen({ navigation }) {
             minutes={item.minutes}
             sets={item.sets}
             reps={item.reps}
-            onPress={() => navigation.navigate(routes.EXERCISE_DETAILS, item)}
+            onPress={() => navigation.navigate(PATH.EXERCISE_DETAILS, item)}
           />
         )}
       />
@@ -118,6 +118,10 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: colors.white,
   },
+  title: {
+    fontSize: 35,
+    fontWeight: "bold",
+    color: colors.black,
+    textAlign: "center",
+  },
 });
-
-export default ExercisesScreen;

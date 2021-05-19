@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, Text, StyleSheet, Alert } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 import * as firebase from "firebase";
-import { loggingOut } from "../api/firebaseMethods";
+import { FirebaseContext } from "../api/FirebaseProvider";
+import colors from "../config/colors";
+import Screen from "../components/Screen";
+import AppButton from "../components/AppButton";
 
-export default function Dashboard({ navigation }) {
+export default function ProfileScreen({ navigation }) {
   let currentUserUID = firebase.auth().currentUser.uid;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+
+  const { signOut } = useContext(FirebaseContext);
 
   useEffect(() => {
     async function getUserInfo() {
@@ -36,74 +40,40 @@ export default function Dashboard({ navigation }) {
   });
 
   const handlePress = () => {
-    loggingOut();
-    navigation.replace("Home");
+    signOut();
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>Dashboard</Text>
-      </View>
+    <Screen style={styles.screen}>
+      <Text style={styles.title}>My Profile</Text>
       <Text style={styles.text}>
         Hi {firstName} {lastName}!
       </Text>
       <Text style={styles.text}>Email: {email}</Text>
-      <TouchableOpacity style={styles.button} onPress={handlePress}>
-        <Text style={styles.buttonText}>Log Out</Text>
-      </TouchableOpacity>
-    </View>
+      <AppButton title="Sign Out" onPress={handlePress} icon="logout" />
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: "#43b0f1",
-    alignItems: "center",
+  screen: {
+    padding: 10,
     justifyContent: "center",
-  },
-  titleContainer: {
-    position: "absolute",
-    top: 170,
+    backgroundColor: colors.white,
   },
   title: {
     fontSize: 35,
     fontWeight: "bold",
-    color: "white",
-    textAlign: "center",
-  },
-  card: {
-    height: 400,
-    width: "85%",
-    backgroundColor: "#e8eef1",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-  },
-  button: {
-    width: 305,
-    padding: 5,
-    backgroundColor: "#057dcd",
-    borderColor: "white",
-    borderRadius: 15,
-    alignSelf: "center",
-    margin: "5%",
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "white",
-    fontWeight: "bold",
+    color: colors.black,
     textAlign: "center",
   },
   text: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 18,
     fontStyle: "italic",
     marginTop: "2%",
     marginBottom: "10%",
     fontWeight: "bold",
-    color: "black",
+    color: colors.black,
   },
 });

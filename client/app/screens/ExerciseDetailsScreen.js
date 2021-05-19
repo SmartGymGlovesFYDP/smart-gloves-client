@@ -7,7 +7,7 @@ import AppText from "../components/AppText";
 import ListItem from "../components/lists/ListItem";
 import colors from "../config/colors";
 
-function ExerciseDetailsScreen({ route }) {
+export default function ExerciseDetailsScreen({ route }) {
   const exercise = route.params;
 
   return (
@@ -89,5 +89,3 @@ const styles = StyleSheet.create({
     backgroundColor: colors.medium,
   },
 });
-
-export default ExerciseDetailsScreen;
