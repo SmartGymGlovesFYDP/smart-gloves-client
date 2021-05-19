@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { Rating } from "react-native-rating-element";
+import AppButton from "../components/AppButton";
 
 import AppText from "../components/AppText";
 import ListItem from "../components/lists/ListItem";
@@ -34,13 +35,19 @@ function ExerciseDetailsScreen({ route }) {
             </AppText>
           </View>
         </View>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require("../assets/icon.png")}
-            title="Vignesh Ravindran"
-            subTitle="5/5 highly recommend it"
-          />
-        </View>
+      </View>
+      <AppButton
+        title="Start Workout"
+        width="auto"
+        fontWeight="normal"
+        onPress={() => console.log("To be implemented")}
+      />
+      <View style={styles.userContainer}>
+        <ListItem
+          image={require("../assets/icon.png")}
+          title="Vignesh Ravindran"
+          subTitle="5/5 highly recommend it"
+        />
       </View>
     </View>
   );
