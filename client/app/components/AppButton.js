@@ -5,10 +5,17 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 import defaultStyles from "../config/styles";
 
-function AppButton({ title, onPress, color = "primary", icon }) {
+function AppButton({
+  title,
+  onPress,
+  color = "primary",
+  icon,
+  fontWeight = "bold",
+  width = "100%",
+}) {
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: colors[color] }]}
+      style={[styles.button, { backgroundColor: colors[color], width }]}
       onPress={onPress}
     >
       {icon && (
@@ -19,7 +26,7 @@ function AppButton({ title, onPress, color = "primary", icon }) {
           style={styles.icon}
         />
       )}
-      <Text style={styles.text}>{title}</Text>
+      <Text style={[styles.text, { fontWeight }]}>{title}</Text>
     </TouchableOpacity>
   );
 }
@@ -31,7 +38,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
-    width: "90%",
     margin: "5%",
     borderColor: colors.white,
     flexDirection: "row",
@@ -39,7 +45,6 @@ const styles = StyleSheet.create({
   text: {
     color: colors.white,
     fontSize: 20,
-    fontWeight: "bold",
   },
   icon: {
     marginRight: 10,

@@ -1,8 +1,9 @@
-import React from "react";
-import { FlatList, StyleSheet, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { FlatList, StyleSheet } from "react-native";
 
 import Card from "../components/Card";
 import Screen from "../components/Screen";
+import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
 import PATH from "../navigation/Path";
 
@@ -55,11 +56,46 @@ const exercises = [
 ];
 
 export default function ExercisesScreen({ navigation }) {
+  const [search, setSearch] = useState("");
+  // right now the mainDataState will seem very redundant but when pulling data from server we will need to handle the initial fetch
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [mainDataSource, setMainDataSource] = useState([]);
+
+  // TODO: deserialize JSON response of exercise list from server
+  useEffect(() => {
+    setFilteredDataSource(exercises);
+    setMainDataSource(exercises);
+  }, []);
+
+  const searchFilterFunction = (text) => {
+    if (text) {
+      // check exists search request matches by checking if index exists
+      const newData = mainDataSource.filter(function (item) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // reset to show original list
+      setFilteredDataSource(mainDataSource);
+      setSearch(text);
+    }
+  };
+
   return (
     <Screen style={styles.screen}>
-      <Text style={styles.title}>Exercises</Text>
+      <AppSearchBar
+        placeholder="Discover your next workout! ..."
+        onChangeText={(text) => searchFilterFunction(text)}
+        onClear={(text) => searchFilterFunction("")}
+        value={search}
+      />
       <FlatList
-        data={exercises}
+        data={filteredDataSource}
         keyExtractor={(exercise) => exercise.id.toString()}
         renderItem={({ item }) => (
           <Card
@@ -79,7 +115,9 @@ export default function ExercisesScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 20,
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
     backgroundColor: colors.white,
   },
   title: {
