@@ -1,6 +1,6 @@
-import React from 'react';
-import { FirebaseProvider } from '../api/FirebaseProvider';
-import Routes from './Routes';
+import React from "react";
+import { FirebaseProvider } from "../api/FirebaseProvider";
+import Routes from "./Routes";
 
 const Providers = () => {
   return (
@@ -8,6 +8,6 @@ const Providers = () => {
       <Routes />
     </FirebaseProvider>
   );
-}
+};
 
 export default Providers;

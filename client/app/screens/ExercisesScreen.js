@@ -5,7 +5,7 @@ import Card from "../components/Card";
 import Screen from "../components/Screen";
 import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
-import PATH from "../navigation/Path";
+import PATH from "../navigation/path";
 
 const exercises = [
   {
@@ -55,7 +55,7 @@ const exercises = [
   },
 ];
 
-function ExercisesScreen({ navigation }) {
+export default function ExercisesScreen({ navigation }) {
   const [search, setSearch] = useState("");
   // right now the mainDataState will seem very redundant but when pulling data from server we will need to handle the initial fetch
   const [filteredDataSource, setFilteredDataSource] = useState([]);
@@ -115,7 +115,9 @@ function ExercisesScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   screen: {
-    padding: 20,
+    paddingTop: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
     backgroundColor: colors.white,
   },
   title: {
