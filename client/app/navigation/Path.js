@@ -6,6 +6,7 @@ export default Object.freeze({
   // Post-Authorization Routes
   // Tab 1: Home Screen
   HOME: "Home",
+  METRICS: "Metrics",
   // Tab 2: MyProgress Screen
   MYPROGRESS: "Progress",
   // Tab 3: Exercise Screen
