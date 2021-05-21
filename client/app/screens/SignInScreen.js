@@ -12,7 +12,7 @@ export default function SignInScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signInWithEmail } = useContext(FirebaseContext);
+  const { signInWithEmail, signInWithGoogle } = useContext(FirebaseContext);
 
   const handlePress = () => {
     if (!email) {
@@ -33,7 +33,7 @@ export default function SignInScreen({ navigation }) {
   };
 
   const googleSignIn = () => {
-    console.log("Google sign in to be implemented!");
+    signInWithGoogle();
   };
 
   return (
@@ -101,7 +101,7 @@ export default function SignInScreen({ navigation }) {
         <View style={styles.signInButton}>
           <AppButton
             title="Sign In"
-            color="primary"
+            color="highlight"
             icon="login"
             onPress={handlePress}
           />

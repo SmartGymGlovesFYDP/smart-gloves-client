@@ -50,7 +50,7 @@ export default function ForgotPasswordScreen({ navigation }) {
         <View style={styles.signUpButton}>
           <AppButton
             title="Send Reset Email"
-            color="primary"
+            color="highlight"
             onPress={handlePress}
           />
         </View>

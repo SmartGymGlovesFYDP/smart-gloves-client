@@ -14,7 +14,7 @@ export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signUpWithEmail } = useContext(FirebaseContext);
+  const { signUpWithEmail, signInWithGoogle } = useContext(FirebaseContext);
 
   const emptyState = () => {
     setFirstName("");
@@ -43,7 +43,7 @@ export default function SignUpScreen({ navigation }) {
   };
 
   const googleSignUp = () => {
-    console.log("Google sign up to be implemented!");
+    signInWithGoogle();
   };
 
   return (
@@ -135,7 +135,7 @@ export default function SignUpScreen({ navigation }) {
         <View style={styles.signUpButton}>
           <AppButton
             title="Sign Up"
-            color="primary"
+            color="highlight"
             icon="login"
             onPress={handlePress}
           />

@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState } from "react";
 import * as firebase from "firebase";
+import * as Google from "expo-google-app-auth";
 import "firebase/firestore";
-// import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { Alert } from "react-native";
 
-// import auth from '@react-native-firebase/auth';
-// import firestore from '@react-native-firebase/firestore';
+const IOS_CLIENT_ID =
+  "247175138021-pmp6jvq2ro3m6a0vq7vbuu3u5j6ouk6u.apps.googleusercontent.com";
+const ANDROID_CLIENT_ID =
+  "247175138021-bi69a16t10cq4bcm9eaq31m5sh7n690v.apps.googleusercontent.com";
 
 export const FirebaseContext = createContext();
 
@@ -40,24 +42,51 @@ export const FirebaseProvider = ({ children }) => {
     }
   }
 
-  //   async function signInWithGmail() {
-  //     try {
-  //         // Get the users ID token
-  //         const { idToken } = await GoogleSignin.signIn();
+  async function signInWithGoogle() {
+    try {
+      const result = await Google.logInAsync({
+        androidClientId: ANDROID_CLIENT_ID,
+        iosClientId: IOS_CLIENT_ID,
+        scopes: ["profile", "email"],
+      });
 
-  //         // Create a Google credential with the token
-  //         const googleCredential = firebase.auth.GoogleAuthProvider.credential(idToken);
+      if (result.type === "success") {
+        const { idToken, accessToken } = result;
+        const credential = firebase.auth.GoogleAuthProvider.credential(
+          idToken,
+          accessToken
+        );
 
-  //         // Sign-in the user with the credential
-  //         await firebase.auth().signInWithCredential(googleCredential)
-  //         //we need to catch the whole sign up process if it fails too.
-  //         .catch(error => {
-  //             console.log('Gmail: Something went wrong with sign up: ', error);
-  //         });
-  //       } catch(error) {
-  //         Alert.alert("Gmail: There is something wrong!", err.message);
-  //       }
-  //   }
+        firebase
+          .auth()
+          .signInWithCredential(credential)
+          .then((res) => {
+            if (res.additionalUserInfo.isNewUser) {
+              // user res, create your user, do whatever you want
+              // res.additionalUserInfo.isNewUser - flag to show if new user
+              // console.log("UID: " + res.user.uid);
+              // console.log("New: " + res.additionalUserInfo.isNewUser);
+              // console.log("Email: " + res.additionalUserInfo.profile.email);
+              // console.log("Last Name: " + res.additionalUserInfo.profile.family_name);
+              // console.log("First Name: " + res.additionalUserInfo.profile.given_name);
+              const db = firebase.firestore();
+              db.collection("users").doc(res.user.uid).set({
+                email: res.additionalUserInfo.profile.email,
+                lastName: res.additionalUserInfo.profile.family_name,
+                firstName: res.additionalUserInfo.profile.given_name,
+              });
+            }
+          })
+          .catch((error) => {
+            console.log("firebase cred err:", error);
+          });
+      } else {
+        return { cancelled: true };
+      }
+    } catch (error) {
+      Alert.alert("Gmail: There is something wrong!", err.message);
+    }
+  }
 
   async function signOut() {
     try {
@@ -83,7 +112,7 @@ export const FirebaseProvider = ({ children }) => {
         setUser,
         signUpWithEmail,
         signInWithEmail,
-        // signInWithGmail,
+        signInWithGoogle,
         signOut,
         forgotPassword,
       }}
