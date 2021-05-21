@@ -2,6 +2,8 @@ export default Object.freeze({
   // Pre-Authorization Routes
   SIGNIN: "SignIn",
   SIGNUP: "SignUp",
+  WELCOME: "Welcome",
+  FORGOT: "Forgot",
 
   // Post-Authorization Routes
   // Tab 1: Home Screen

@@ -16,7 +16,7 @@ import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
 import PATH from "../navigation/path";
 
-export default function Metrics({ navigation }) {
+export default function MetricsScreen({ navigation }) {
   const [data, setData] = useState({});
 
   useEffect(() => {

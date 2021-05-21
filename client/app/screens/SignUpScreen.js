@@ -1,25 +1,18 @@
 import React, { useState, useContext } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Alert,
-  ScrollView,
-  Keyboard,
-  StyleSheet,
-  SafeAreaView,
-} from "react-native";
+import { View, Text, TextInput, Alert, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
+import colors from "../config/colors";
 import { FirebaseContext } from "../api/FirebaseProvider";
+import Screen from "../components/Screen";
 import PATH from "../navigation/path";
+import AppButton from "../components/AppButton";
+import AppBackButton from "../components/AppBackButton";
 
 export default function SignUpScreen({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const { signUpWithEmail } = useContext(FirebaseContext);
 
@@ -28,154 +21,217 @@ export default function SignUpScreen({ navigation }) {
     setLastName("");
     setEmail("");
     setPassword("");
-    setConfirmPassword("");
   };
 
   const handlePress = () => {
     if (!firstName) {
-      Alert.alert("First name is required");
+      Alert.alert("First name is required.");
+    } else if (!lastName) {
+      Alert.alert("First name is required.");
     } else if (!email) {
       Alert.alert("Email field is required.");
     } else if (!password) {
       Alert.alert("Password field is required.");
-    } else if (!confirmPassword) {
-      setPassword("");
-      Alert.alert("Confirm password field is required.");
-    } else if (password !== confirmPassword) {
-      Alert.alert("Password does not match!");
     } else {
       signUpWithEmail(email, password, lastName, firstName);
       emptyState();
     }
   };
 
+  const appleSignUp = () => {
+    console.log("Apple sign up to be implemented!");
+  };
+
+  const googleSignUp = () => {
+    console.log("Google sign up to be implemented!");
+  };
+
   return (
-    <SafeAreaView>
-      <View style={styles.container}>
-        <View style={styles.card}>
-          <Text style={styles.text}>Create an account </Text>
-
-          <ScrollView onBlur={Keyboard.dismiss}>
-            <TextInput
-              style={styles.textInput}
-              placeholder="First name"
-              value={firstName}
-              onChangeText={(name) => setFirstName(name)}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Last name"
-              value={lastName}
-              onChangeText={(name) => setLastName(name)}
-            />
-
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter your email"
-              value={email}
-              onChangeText={(email) => setEmail(email)}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
-
-            <TextInput
-              style={styles.textInput}
-              placeholder="Enter your password"
-              value={password}
-              onChangeText={(password) => setPassword(password)}
-              secureTextEntry={true}
-            />
-            <TextInput
-              style={styles.textInput}
-              placeholder="Retype your password"
-              value={confirmPassword}
-              onChangeText={(password2) => setConfirmPassword(password2)}
-              secureTextEntry={true}
-            />
-            <TouchableOpacity
-              style={styles.signup_button}
-              onPress={handlePress}
-            >
-              <Text style={styles.buttonText}>Sign Up</Text>
+    <Screen>
+      <View style={styles.topBar}>
+        <AppBackButton onPress={() => navigation.navigate(PATH.WELCOME)} />
+        <View style={styles.topWrapper}>
+          <View style={styles.tab1}>
+            <TouchableOpacity onPress={() => navigation.navigate(PATH.SIGNIN)}>
+              <Text style={styles.tab1Text}>Sign In</Text>
             </TouchableOpacity>
-
-            <Text style={styles.inlineText}>Have an account?</Text>
-            <TouchableOpacity
-              style={styles.signin_button}
-              onPress={() => navigation.navigate(PATH.SIGNIN)}
-            >
-              <Text style={styles.buttonText}>Sign In</Text>
-            </TouchableOpacity>
-          </ScrollView>
+          </View>
+          <View style={styles.tab2}>
+            <Text style={styles.tab2Text}>Sign Up</Text>
+          </View>
         </View>
       </View>
-    </SafeAreaView>
+      <View style={styles.bottomBar}>
+        <View style={styles.bottomWrapper}>
+          <AppButton
+            title="Sign up with Apple"
+            color="black"
+            icon="apple"
+            onPress={appleSignUp}
+          />
+
+          <AppButton
+            title="Sign up with Google"
+            color="icewhite"
+            icon="google"
+            onPress={googleSignUp}
+            textBlack
+            buttonBorder
+          />
+
+          <Text style={styles.text}> or continue with email </Text>
+          <View style={styles.inputView}>
+            <Text style={[styles.inputTitle, { borderTopWidth: 1 }]}>
+              First Name
+            </Text>
+            <TextInput
+              style={[styles.inputBox, { borderTopWidth: 1 }]}
+              placeholder="Required"
+              value={firstName}
+              onChangeText={(firstName) => setFirstName(firstName)}
+              autoCapitalize="words"
+              autoCompleteType="name"
+              returnKeyType="next"
+            />
+          </View>
+          <View style={styles.inputView}>
+            <Text style={styles.inputTitle}>Last Name</Text>
+            <TextInput
+              style={styles.inputBox}
+              placeholder="Required"
+              value={lastName}
+              onChangeText={(lastName) => setLastName(lastName)}
+              autoCapitalize="words"
+              autoCompleteType="name"
+              returnKeyType="next"
+            />
+          </View>
+          <View style={styles.inputView}>
+            <Text style={styles.inputTitle}>Email</Text>
+            <TextInput
+              style={styles.inputBox}
+              placeholder="Required"
+              value={email}
+              onChangeText={(email) => setEmail(email)}
+              autoCapitalize="none"
+              autoCompleteType="email"
+              returnKeyType="next"
+            />
+          </View>
+          <View style={styles.inputView}>
+            <Text style={styles.inputTitle}>Password</Text>
+            <TextInput
+              style={styles.inputBox}
+              placeholder="At least 8 characters"
+              value={password}
+              onChangeText={(password) => setPassword(password)}
+              autoCapitalize="none"
+              returnKeyType="done"
+              secureTextEntry={true}
+            />
+          </View>
+        </View>
+
+        <View style={styles.signUpButton}>
+          <AppButton
+            title="Sign Up"
+            color="primary"
+            icon="login"
+            onPress={handlePress}
+          />
+        </View>
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  topBar: {
+    backgroundColor: colors.white,
+    flex: 0.15,
+  },
+  topWrapper: {
+    left: "80%",
+    flexDirection: "row",
+    width: "50%",
+    alignContent: "center",
+    // backgroundColor: "black",
+  },
+  tab1: {
+    flex: 0.5,
+    marginRight: -16,
+  },
+  tab1Text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: colors.black,
+    backgroundColor: colors.icewhite,
+    paddingTop: 7,
+    paddingBottom: 5,
+    paddingRight: 12,
+    textAlign: "center",
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderColor: colors.black,
+    borderWidth: 2,
+  },
+  tab2: {
+    flex: 0.5,
+  },
+  tab2Text: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: colors.icewhite,
+    backgroundColor: colors.black,
+    paddingTop: 8,
+    paddingBottom: 8,
+    textAlign: "center",
+    borderRadius: 20,
+  },
+  bottomBar: {
+    backgroundColor: "#fff",
+    flex: 0.85,
     height: "100%",
-    width: "100%",
-    backgroundColor: "#1e3d58",
-    alignItems: "center",
-    justifyContent: "center",
   },
-  card: {
-    height: 450,
-    width: "85%",
-    backgroundColor: "#e8eef1",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-  },
-  signin_button: {
-    width: 305,
-    padding: 5,
-    backgroundColor: "#43b0f1",
-    borderColor: "white",
-    borderRadius: 15,
-    alignSelf: "center",
-    margin: "5%",
-  },
-  signup_button: {
-    width: 305,
-    padding: 5,
-    backgroundColor: "#057dcd",
-    borderColor: "white",
-    borderRadius: 15,
-    alignSelf: "center",
-    margin: "5%",
-  },
-  buttonText: {
-    fontSize: 20,
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  inlineText: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#43b0f1",
-    textAlign: "center",
-    marginTop: "5%",
-  },
-  textInput: {
-    alignSelf: "center",
-    width: 300,
-    fontSize: 18,
-    borderWidth: 1,
-    borderRadius: 10,
-    borderColor: "#057dcd",
-    padding: 10,
-    margin: 5,
+  bottomWrapper: {
+    top: "5%",
   },
   text: {
-    textAlign: "center",
-    fontSize: 22,
-    margin: "5%",
-    marginTop: "5%",
+    justifyContent: "center",
+    top: "5%",
+    left: "30%",
+    color: colors.medium,
+  },
+  inputView: {
+    flexDirection: "row",
+    top: "10%",
+    left: "11%",
+  },
+  inputTitle: {
+    color: colors.black,
     fontWeight: "bold",
-    color: "#057dcd",
+    fontSize: 16,
+    flex: 0.25,
+    borderColor: colors.black,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderStyle: "dashed",
+    textAlign: "right",
+    paddingTop: 10,
+    paddingBottom: 10,
+  },
+  inputBox: {
+    fontSize: 14,
+    flex: 0.55,
+    borderColor: colors.black,
+    borderWidth: 0,
+    borderBottomWidth: 1,
+    borderStyle: "dashed",
+    paddingTop: 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+  },
+  signUpButton: {
+    top: "15%",
   },
 });

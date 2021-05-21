@@ -9,7 +9,7 @@ import PATH from "./path";
 import HomeScreen from "../screens/HomeScreen";
 // Tab 2: My Progress Screen and child screens
 import MyProgressScreen from "../screens/MyProgressScreen";
-import Metrics from "../screens/Metrics";
+import MetricsScreen from "../screens/MetricsScreen";
 // Tab 3: Exercise Screen and child screens
 import ExercisesScreen from "../screens/ExercisesScreen";
 import ExerciseDetailsScreen from "../screens/ExerciseDetailsScreen";
@@ -35,7 +35,7 @@ const MetricsStack = ({ navigation }) => (
   <Stack.Navigator>
     <Stack.Screen
       name={PATH.METRICS}
-      component={Metrics}
+      component={MetricsScreen}
       options={{ headerShown: false }}
     />
     {/* ADD MORE SCREENS AS NECESSARY */}
@@ -92,15 +92,7 @@ function AppNavigator() {
         activeTintColor: colors.primary,
       }}
     >
-      <Tab.Screen
-        name={PATH.METRICS}
-        component={MetricsStack}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="metrics" color={color} size={size} />
-          ),
-        }}
-      />
+      
       <Tab.Screen
         name={PATH.HOME}
         component={HomeStack}
@@ -129,6 +121,15 @@ function AppNavigator() {
               color={color}
               size={size}
             />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name={PATH.METRICS}
+        component={MetricsStack}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="axis-arrow" color={color} size={size} />
           ),
         }}
       />

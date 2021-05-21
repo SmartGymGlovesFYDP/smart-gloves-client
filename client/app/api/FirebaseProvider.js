@@ -67,6 +67,15 @@ export const FirebaseProvider = ({ children }) => {
     }
   }
 
+  async function forgotPassword(email) {
+    try {
+      await firebase.auth().sendPasswordResetEmail(email);
+      Alert.alert("Reset Email has been sent to " + email);
+    } catch (err) {
+      Alert.alert("There is something wrong!", err.message);
+    }
+  }
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -76,6 +85,7 @@ export const FirebaseProvider = ({ children }) => {
         signInWithEmail,
         // signInWithGmail,
         signOut,
+        forgotPassword,
       }}
     >
       {children}

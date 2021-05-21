@@ -50,7 +50,12 @@ export default function ProfileScreen({ navigation }) {
         Hi {firstName} {lastName}!
       </Text>
       <Text style={styles.text}>Email: {email}</Text>
-      <AppButton title="Sign Out" onPress={handlePress} icon="logout" />
+      <AppButton
+        title="Sign Out"
+        color="primary"
+        onPress={handlePress}
+        icon="logout"
+      />
     </Screen>
   );
 }

@@ -40,6 +40,7 @@ export default function ExerciseDetailsScreen({ route }) {
         title="Start Workout"
         width="auto"
         fontWeight="normal"
+        color="primary"
         onPress={() => console.log("To be implemented")}
       />
       <View style={styles.userContainer}>
