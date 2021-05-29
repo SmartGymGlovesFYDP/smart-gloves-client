@@ -17,6 +17,7 @@ export function useFirebase() {
 
 export const FirebaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [rawData, setRawData] = useState([]);
 
   async function signInWithEmail(email, password) {
     try {
@@ -105,6 +106,34 @@ export const FirebaseProvider = ({ children }) => {
     }
   }
 
+  async function getRawData() {
+    try {
+      await firebase
+        .database()
+        .ref("/Gyroscope/Sample")
+        .on("value", (snapshot) => {
+          // setRawData(JSON.stringify(snapshot));
+          // console.log("snapshot "+JSON.stringify(snapshot));
+          snapshot.forEach((userSnapshot) => {
+            let singleData = userSnapshot.val();
+            let packet = {
+              timestamp: singleData.timestamp ? singleData.timestamp : "",
+              ax: singleData.ax,
+              ay: singleData.ay,
+              az: singleData.az,
+              gx: singleData.gx,
+              gy: singleData.gy,
+              gz: singleData.gz,
+            };
+            // console.log(singleData);
+            setRawData((rawData) => [...rawData, packet]);
+          });
+        });
+    } catch (err) {
+      Alert.alert("Failed to sample data!", err.message);
+    }
+  }
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -115,6 +144,9 @@ export const FirebaseProvider = ({ children }) => {
         signInWithGoogle,
         signOut,
         forgotPassword,
+        rawData,
+        getRawData,
+        setRawData,
       }}
     >
       {children}
