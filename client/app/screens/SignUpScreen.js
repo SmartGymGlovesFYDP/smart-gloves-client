@@ -33,8 +33,12 @@ export default function SignUpScreen({ navigation }) {
     } else if (!password) {
       Alert.alert("Password field is required.");
     } else {
-      signUpWithEmail(email, password, lastName, firstName);
-      emptyState();
+      if (password.length<8){
+        Alert.alert("Password must be at least 8 characters long!");
+      } else {
+        signUpWithEmail(email, password, lastName, firstName);
+        emptyState();
+      }
     }
   };
 
