@@ -6,7 +6,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../config/colors";
 import Background from "../assets/background.mp4";
 import Screen from "../components/Screen";
-import PATH from "../navigation/path";
+import PATH from "../navigation/Path";
 import AppButton from "../components/AppButton";
 
 export default function WelcomeScreen({ navigation }) {

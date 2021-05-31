@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../config/colors";
 import { FirebaseContext } from "../api/FirebaseProvider";
 import Screen from "../components/Screen";
-import PATH from "../navigation/path";
+import PATH from "../navigation/Path";
 import AppButton from "../components/AppButton";
 import AppBackButton from "../components/AppBackButton";
 

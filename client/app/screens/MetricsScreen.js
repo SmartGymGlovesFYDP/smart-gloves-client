@@ -14,7 +14,7 @@ import Card from "../components/Card";
 import Screen from "../components/Screen";
 import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
-import PATH from "../navigation/path";
+import PATH from "../navigation/Path";
 
 export default function MetricsScreen({ navigation }) {
   const [data, setData] = useState({});
