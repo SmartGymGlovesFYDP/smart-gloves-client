@@ -140,31 +140,39 @@ function HomeScreen({ navigation }) {
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>My Profile</Text>
+      <Text style={styles.absoluteMyProfile} >My Profile</Text>
       
       <IconButton
     icon="pencil"
     color={Colors.grey900}
     size={20}
+    style={styles.absolute}
     onPress={pickImage}
       />
+      <View style={{position: 'absolute', top: 120, left: 70, right: 0, bottom: 0}}>
         {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, borderRadius: 200 / 2 }} />}
+      </View>
 
-      <Text style={styles.text}>
-        {firstName} {lastName}
-      </Text>
+      <View style={{position: 'absolute', top: 330, left: 130, right: 0, bottom: 0, fontWeight: 'bold'}}>
+        <Text style={styles.absoluteName}>
+          {firstName} {lastName}
+        </Text>
+      </View>
 
-      <Text style={styles.text}>
-        My Settings
-      </Text>
+      <View style={{position: 'absolute', top: 370, left: 30, right: 0, bottom: 0}}>
+        <Text style={styles.text}>
+          My Settings
+        </Text>
+      </View>
 
-
+      <View style={{position: 'absolute', top: 410, left: 30, right: 0, bottom: 0}}>
       <ProfileButton
         title="Notification settings"
         width="auto"
         fontWeight="normal"
         onPress={() => navigation.navigate('Details')}
       />
+      </View>
 
     </View>
   );
@@ -236,6 +244,30 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginHorizontal: 15,
     marginBottom: 10,
+  },
+  absolute: {
+    width: 100,
+    height: 100,
+    position: 'absolute',
+    top: 240,
+    left: 190,
+    zIndex: 5,
+  },
+  absoluteMyProfile: {
+    color: '#000',
+    fontSize: 25,
+    width: 100,
+    height: 100,
+    position: 'absolute',
+    top: 40,
+    left: 40,
+    zIndex: 5,
+    fontWeight: 'bold',
+  },
+  absoluteName: {
+    color: '#000',
+    fontSize: 25,
+    fontWeight: 'bold',
   },
 });
 
