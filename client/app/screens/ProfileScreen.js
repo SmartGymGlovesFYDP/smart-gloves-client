@@ -8,6 +8,11 @@ import { IconButton, Colors } from 'react-native-paper';
 import * as firebase from "firebase";
 import ProfileButton from "../components/ProfileButton";
 import { FirebaseContext } from "../api/FirebaseProvider";
+import PersonalRecordsScreen from "./ProfileScreens/PersonalRecords";
+import ManageGloves from "./ProfileScreens/ManageGloves";
+import Achievements from "./ProfileScreens/Achievements";
+import EditProfile from "./ProfileScreens/EditProfile";
+import Goals from "./ProfileScreens/Goals";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -65,22 +70,6 @@ function HomeScreen({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  state = {
-    names: [
-       {'name': 'Ben', 'id': 1},
-       {'name': 'Susan', 'id': 2},
-       {'name': 'Robert', 'id': 3},
-       {'name': 'Mary', 'id': 4},
-       {'name': 'Daniel', 'id': 5},
-       {'name': 'Laura', 'id': 6},
-       {'name': 'John', 'id': 7},
-       {'name': 'Debra', 'id': 8},
-       {'name': 'Aron', 'id': 9},
-       {'name': 'Ann', 'id': 10},
-       {'name': 'Steve', 'id': 11},
-       {'name': 'Olivia', 'id': 12}
-    ]
- }
   
   useEffect(() => {
     async function getUserInfo() {
@@ -237,73 +226,6 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function Achievements({ navigation }) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      
-    </View>
-  );
-}
-
-function Goals({ navigation }) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      
-    </View>
-  );
-}
-
-function EditProfile({ navigation }) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      
-    </View>
-  );
-}
-
-function ManageGloves({ navigation }) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      
-    </View>
-  );
-}
-
-
-function PersonalRecordsScreen({ navigation }) {
-  
-
-  return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
-      
-    </View>
-  );
-}
 
 function DetailsScreen({ navigation }) {
   const [expoPushToken, setExpoPushToken] = useState('');
