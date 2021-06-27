@@ -196,7 +196,6 @@ function HomeScreen({ navigation }) {
         </Text>
       
 
-      {/* <View style={{position: 'absolute', top: 340, left: 30, right: 0, bottom: 0}}> */}
       <ProfileButton
         title="Notification settings"
         width="auto"
@@ -215,9 +214,7 @@ function HomeScreen({ navigation }) {
         fontWeight="normal"
         onPress={() => navigation.navigate('ManageGloves')}
       />
-{/* 
-      
-      </View> */}
+
       </View>
     </View>
 
