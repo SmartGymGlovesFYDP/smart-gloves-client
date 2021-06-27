@@ -1,5 +1,11 @@
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import React, { Component } from 'react'
+import {
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+} from 'react-native'
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../config/colors";
@@ -14,8 +20,9 @@ function ProfileButton({
   width = "100%",
 }) {
   return (
+    <View style={styles.container}>
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: colors[color], width }]}
+      style={styles.button}
       onPress={onPress}
     >
       {icon && (
@@ -26,29 +33,35 @@ function ProfileButton({
           style={styles.icon}
         />
       )}
-      <Text style={[styles.text, { fontWeight }]}>{title}</Text>
+      <Text style={[styles.text, { fontWeight: "bold" }]}>{title}</Text>
     </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 10
+  },
   button: {
-    backgroundColor: colors.white,
-    borderRadius: 15,
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding: 5,
-    margin: "5%",
-    borderColor: colors.white,
-    flexDirection: "row",
+    backgroundColor: '#FFFFFF',
+    padding: 10,
+    textTransform: 'lowercase', // Notice this updates the default style
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#d3d3d3',
   },
-  text: {
-    color: colors.black,
-    fontSize: 20,
+  countContainer: {
+    alignItems: 'center',
+    padding: 10
   },
-  icon: {
-    marginRight: 10,
-  },
+  countText: {
+    color: '#FF00FF'
+  }
 });
 
 export default ProfileButton;

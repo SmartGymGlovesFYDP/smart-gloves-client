@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef  } from 'react';
-import { Button, View, Image, Text, Platform, TouchableOpacity, StyleSheet  } from 'react-native';
+import { Button, View, Image, Text, Platform, TouchableOpacity, SafeAreaView, StyleSheet, ScrollView   } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as ImagePicker from 'expo-image-picker';
@@ -65,7 +65,23 @@ function HomeScreen({ navigation }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-
+  state = {
+    names: [
+       {'name': 'Ben', 'id': 1},
+       {'name': 'Susan', 'id': 2},
+       {'name': 'Robert', 'id': 3},
+       {'name': 'Mary', 'id': 4},
+       {'name': 'Daniel', 'id': 5},
+       {'name': 'Laura', 'id': 6},
+       {'name': 'John', 'id': 7},
+       {'name': 'Debra', 'id': 8},
+       {'name': 'Aron', 'id': 9},
+       {'name': 'Ann', 'id': 10},
+       {'name': 'Steve', 'id': 11},
+       {'name': 'Olivia', 'id': 12}
+    ]
+ }
+  
   useEffect(() => {
     async function getUserInfo() {
       try {
@@ -139,8 +155,8 @@ function HomeScreen({ navigation }) {
   
 
   return (
+    
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={styles.absoluteMyProfile} >My Profile</Text>
       
       <IconButton
     icon="pencil"
@@ -149,31 +165,142 @@ function HomeScreen({ navigation }) {
     style={styles.absolute}
     onPress={pickImage}
       />
-      <View style={{position: 'absolute', top: 120, left: 70, right: 0, bottom: 0}}>
-        {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, borderRadius: 200 / 2 }} />}
+      <View style={{position: 'absolute', top: 10, left: 100, right: 0, bottom: 0}}>
+        {image && <Image source={{ uri: image }} style={{ width: 150, height: 150, borderRadius: 150 / 2 }} />}
       </View>
 
-      <View style={{position: 'absolute', top: 330, left: 130, right: 0, bottom: 0, fontWeight: 'bold'}}>
+      <View style={{position: 'absolute', top: 175, left: 130, right: 0, bottom: 0, fontWeight: 'bold'}}>
         <Text style={styles.absoluteName}>
           {firstName} {lastName}
         </Text>
       </View>
 
-      <View style={{position: 'absolute', top: 370, left: 30, right: 0, bottom: 0}}>
+     
+      <View style={{position: 'absolute', top: 215, left: 30, right: 0, bottom: 0}}>
+      <Text style={styles.text}>
+          My Records 
+        </Text>
+
+      <ProfileButton
+        title="PersonalRecords"
+        width="auto"
+        fontWeight="normal"
+        onPress={() => navigation.navigate('PersonalRecords')}
+      />
+
+      <ProfileButton
+        title="Achievements"
+        width="auto"
+        fontWeight="normal"
+        onPress={() => navigation.navigate('Achievements')}
+      />
+
+      <ProfileButton
+        title="Goals"
+        width="auto"
+        fontWeight="normal"
+        onPress={() => navigation.navigate('Goals')}
+      />
+
         <Text style={styles.text}>
           My Settings
         </Text>
-      </View>
+      
 
-      <View style={{position: 'absolute', top: 410, left: 30, right: 0, bottom: 0}}>
+      {/* <View style={{position: 'absolute', top: 340, left: 30, right: 0, bottom: 0}}> */}
       <ProfileButton
         title="Notification settings"
         width="auto"
         fontWeight="normal"
         onPress={() => navigation.navigate('Details')}
       />
+      <ProfileButton
+        title="Edit Profile"
+        width="auto"
+        fontWeight="normal"
+        onPress={() => navigation.navigate('EditProfile')}
+      />
+      <ProfileButton
+        title="Manage Gloves"
+        width="auto"
+        fontWeight="normal"
+        onPress={() => navigation.navigate('ManageGloves')}
+      />
+{/* 
+      
+      </View> */}
       </View>
+    </View>
 
+
+
+  );
+}
+
+function Achievements({ navigation }) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}>
+      
+    </View>
+  );
+}
+
+function Goals({ navigation }) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}>
+      
+    </View>
+  );
+}
+
+function EditProfile({ navigation }) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}>
+      
+    </View>
+  );
+}
+
+function ManageGloves({ navigation }) {
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}>
+      
+    </View>
+  );
+}
+
+
+function PersonalRecordsScreen({ navigation }) {
+  
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}>
+      
     </View>
   );
 }
@@ -228,6 +355,17 @@ const Stack = createStackNavigator();
 
 
 const styles = StyleSheet.create({
+  
+  item: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 30,
+    margin: 2,
+    borderColor: '#2a4944',
+    borderWidth: 1,
+    backgroundColor: '#d2f7f1'
+ },
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -249,7 +387,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     position: 'absolute',
-    top: 240,
+    top: 115,
     left: 190,
     zIndex: 5,
   },
@@ -273,9 +411,14 @@ const styles = StyleSheet.create({
 
 function App() {
   return (
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator initialRouteName="My Profile">
+        <Stack.Screen name="My Profile" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen name="PersonalRecords" component={PersonalRecordsScreen} />
+        <Stack.Screen name="Achievements" component={Achievements} />
+        <Stack.Screen name="Goals" component={Goals} />
+        <Stack.Screen name="EditProfile" component={EditProfile} />
+        <Stack.Screen name="ManageGloves" component={ManageGloves} />
       </Stack.Navigator>
   );
 }
