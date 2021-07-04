@@ -136,7 +136,8 @@ function HomeScreen({ navigation }) {
     });
 
     console.log(result);
-
+    //pass result into push or update or set
+    //secondary function to retrieve uri for profile pic, if exists, inside source, render passed in image (from firebase)
     if (!result.cancelled) {
       setImage(result.uri);
     }
