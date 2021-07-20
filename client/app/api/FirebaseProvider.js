@@ -134,6 +134,31 @@ export const FirebaseProvider = ({ children }) => {
     }
   }
 
+  async function getAllWorkouts() {
+    try {
+      let workouts = await firebase.firestore().collection("workouts").get();
+      return workouts;
+    } catch (err) {
+      Alert.alert("Failed to get workouts!", err.message);
+    }
+  }
+
+  async function addWorkout(obj, userId) {
+    try {
+      var db = firebase.firestore();
+      db.collection("workouts").doc(obj.name)
+        .set(obj)
+        // .then((docRef) => {
+        //   console.log("Document written with ID: ", docRef.id);
+        // })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+    } catch (err) {
+      Alert.alert("Failed to add workout!", err.message);
+    }
+  }
+
   return (
     <FirebaseContext.Provider
       value={{
@@ -147,6 +172,8 @@ export const FirebaseProvider = ({ children }) => {
         rawData,
         getRawData,
         setRawData,
+        getAllWorkouts,
+        addWorkout,
       }}
     >
       {children}
