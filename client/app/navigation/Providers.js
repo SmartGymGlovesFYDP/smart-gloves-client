@@ -1,6 +1,6 @@
 import React from "react";
 import { FirebaseProvider } from "../api/FirebaseProvider";
-import Routes from "./Routes";
+import Routes from "./routes";
 
 const Providers = () => {
   return (
