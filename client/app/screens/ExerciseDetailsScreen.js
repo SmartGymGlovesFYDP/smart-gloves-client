@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Image, StyleSheet } from "react-native";
 import { Rating } from "react-native-rating-element";
 import AppButton from "../components/AppButton";
@@ -9,6 +9,17 @@ import colors from "../config/colors";
 
 export default function ExerciseDetailsScreen({ route }) {
   const exercise = route.params;
+  let temp = "5";
+
+  //TODO: figure out what is happening using the state hooks
+  const [data, setData] = useState([{}]);
+
+  const getBackendCall = () => {
+    fetch("http://localhost:8000/exerciseData")
+      .then((res) => res.json())
+      .then((temp) => console.log(temp))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <View>
@@ -41,7 +52,7 @@ export default function ExerciseDetailsScreen({ route }) {
         width="auto"
         fontWeight="normal"
         color="primary"
-        onPress={() => console.log("To be implemented")}
+        onPress={() => getBackendCall()}
       />
       <View style={styles.userContainer}>
         <ListItem
