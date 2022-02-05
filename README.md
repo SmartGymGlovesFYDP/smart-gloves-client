@@ -3,7 +3,7 @@ FYDP project repo to create a React Native and Expo CLI based mobile applicaiton
 
 setup:
 1) npm install
-2) expo install
+2) expo install (make sure you have the latest version of expo)
 3) install expo app on mobile device
 
 to run:
