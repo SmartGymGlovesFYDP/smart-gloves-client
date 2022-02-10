@@ -28,7 +28,7 @@ export default function ExerciseDetailsScreen({ route }) {
     console.log(exerciseTitle);
 
     const db = firebase.firestore();
-    db.collection("users").doc(currentUserUID).collection("userWorkoutHistory").add({
+    db.collection("users").doc(currentUserUID).collection("newWorkout").add({
       workoutName: exerciseTitle,
     });
   };
