@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as firebase from "firebase";
 import { View, Image, StyleSheet } from "react-native";
 import { Rating } from "react-native-rating-element";
 import AppButton from "../components/AppButton";
@@ -11,6 +12,8 @@ export default function ExerciseDetailsScreen({ route }) {
   const exercise = route.params;
   let temp = "5";
 
+  let currentUserUID = firebase.auth().currentUser.uid;
+
   //TODO: figure out what is happening using the state hooks
   const [data, setData] = useState([{}]);
 
@@ -19,6 +22,15 @@ export default function ExerciseDetailsScreen({ route }) {
       .then((res) => res.json())
       .then((temp) => console.log(temp))
       .catch((err) => console.log(err));
+  };
+
+  const startWorkout = (exerciseTitle) => {
+    console.log(exerciseTitle);
+
+    const db = firebase.firestore();
+    db.collection("users").doc(currentUserUID).collection("userWorkoutHistory").add({
+      workoutName: exerciseTitle,
+    });
   };
 
   return (
@@ -52,7 +64,7 @@ export default function ExerciseDetailsScreen({ route }) {
         width="auto"
         fontWeight="normal"
         color="primary"
-        onPress={() => getBackendCall()}
+        onPress={() => startWorkout(exercise.title)}
       />
       <View style={styles.userContainer}>
         <ListItem
