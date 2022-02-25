@@ -32,6 +32,7 @@ export default function ExerciseDetailsScreen({ route }) {
       workoutName: exercise.title,
       majorMuscle: exercise.majorMuscle,
       difficulty: exercise.difficulty,
+      minutes: exercise.minutes,
     });
   };
 
