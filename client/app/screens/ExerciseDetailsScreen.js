@@ -24,12 +24,14 @@ export default function ExerciseDetailsScreen({ route }) {
       .catch((err) => console.log(err));
   };
 
-  const startWorkout = (exerciseTitle) => {
-    console.log(exerciseTitle);
+  const startWorkout = (exercise) => {
+    console.log(exercise);
 
     const db = firebase.firestore();
     db.collection("users").doc(currentUserUID).collection("newWorkout").add({
-      workoutName: exerciseTitle,
+      workoutName: exercise.title,
+      majorMuscle: exercise.majorMuscle,
+      difficulty: exercise.difficulty,
     });
   };
 
@@ -64,7 +66,7 @@ export default function ExerciseDetailsScreen({ route }) {
         width="auto"
         fontWeight="normal"
         color="primary"
-        onPress={() => startWorkout(exercise.title)}
+        onPress={() => startWorkout(exercise)}
       />
       <View style={styles.userContainer}>
         <ListItem
