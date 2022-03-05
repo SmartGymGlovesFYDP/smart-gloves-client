@@ -9,7 +9,6 @@ import colors from "../config/colors";
 import PATH from "../navigation/Path";
 
 export default function ExercisesScreen({ navigation }) {
-
   // NOTE: Ideally this will be the DS used to add a single workout back to the DB
   // var temp = {
   //   createdBy: "Smart Gym",
@@ -95,7 +94,7 @@ export default function ExercisesScreen({ navigation }) {
   useEffect(() => {
     setFilteredDataSource(workoutsAll);
     setMainDataSource(workoutsAll);
-  }, [workoutsAll,exercises]);
+  }, [workoutsAll, exercises]);
 
   const resetRawData = async () => {
     setRawData([]);
@@ -132,6 +131,7 @@ export default function ExercisesScreen({ navigation }) {
       minutes: exercise.variation[0].minutes,
       sets: exercise.variation[0].sets,
       reps: exercise.variation[0].repetition,
+      majorMuscle: exercise.majorMuscle[0],
     }));
 
     // console.log("HEREEEE" + JSON.stringify(temp));
@@ -185,8 +185,16 @@ export default function ExercisesScreen({ navigation }) {
         onClear={(text) => searchFilterFunction("")}
         value={search}
       />
-      <AppButton title="Print All Workouts" color="black" onPress={fetchWorkouts} />
-      <AppButton title="Clear Workout Array" color="black" onPress={clearWorkouts} />
+      <AppButton
+        title="Print All Workouts"
+        color="black"
+        onPress={fetchWorkouts}
+      />
+      <AppButton
+        title="Clear Workout Array"
+        color="black"
+        onPress={clearWorkouts}
+      />
       <FlatList
         data={filteredDataSource}
         keyExtractor={(workoutsAll) => workoutsAll.id.toString()}
