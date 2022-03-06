@@ -82,7 +82,6 @@ export default function ExercisesScreen({ navigation }) {
     useContext(FirebaseContext);
 
   // Array of exercise objects
-  const [exercises, setExercises] = useState([]);
   const [workoutsAll, setWorkoutsAll] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -94,7 +93,7 @@ export default function ExercisesScreen({ navigation }) {
   useEffect(() => {
     setFilteredDataSource(workoutsAll);
     setMainDataSource(workoutsAll);
-  }, [workoutsAll, exercises]);
+  }, [workoutsAll]);
 
   const resetRawData = async () => {
     setRawData([]);
@@ -118,9 +117,10 @@ export default function ExercisesScreen({ navigation }) {
   const fetchWorkouts = async () => {
     let workouts = await getAllWorkouts();
     // This will add all exercises from the database
+    const exercises = [];
     workouts.docs.map((doc) => {
       // Append the exercise object to the array
-      setExercises((exercises) => [...exercises, doc.data()]);
+      exercises.push(doc.data());
       // console.log(JSON.stringify(doc.data()));
     });
 
@@ -145,7 +145,6 @@ export default function ExercisesScreen({ navigation }) {
 
   const clearWorkouts = () => {
     console.log("CLEARED");
-    setExercises([]);
     setWorkoutsAll([]);
   };
 
