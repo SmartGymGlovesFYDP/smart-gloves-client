@@ -92,9 +92,12 @@ export default function ExercisesScreen({ navigation }) {
 
   // TODO: deserialize JSON response of exercise list from server
   useEffect(() => {
+    fetchWorkouts();
+  }, []);
+
+  useEffect(() => {
     setFilteredDataSource(workoutsAll);
     setMainDataSource(workoutsAll);
-    fetchWorkouts();
   }, [workoutsAll]);
 
   const resetRawData = async () => {
