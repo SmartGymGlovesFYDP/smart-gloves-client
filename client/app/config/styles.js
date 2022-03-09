@@ -49,5 +49,14 @@ export default {
     alignItems: "flex-end",
     padding: 16,
   },
+
+  onlyTextButton: {
+    fontSize: 14,
+    fontWeight: "normal",
+    color: colors.blue3P,
+    textAlign: "right",
+    alignItems: "center",
+    padding: 16,
+  },
   //---end of text css---
 };
