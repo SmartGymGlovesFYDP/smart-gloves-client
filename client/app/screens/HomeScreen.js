@@ -7,6 +7,7 @@ import Screen from "../components/Screen";
 import AppButton from "../components/AppButton";
 import { color } from "react-native-reanimated";
 import Header from "../components/Header";
+import DashboardScore from "../components/DashboardScore";
 
 export default function HomeScreen({ navigation }) {
   const { rawData, getRawData, setRawData, getAllWorkouts, addWorkout } = useContext(FirebaseContext);
@@ -15,8 +16,9 @@ export default function HomeScreen({ navigation }) {
     <View style={styles.container}>
       <SafeAreaView>
         <Header title={"Dashboard"} primary={true}></Header>
-        <ScrollView>
+        <ScrollView style={{height:"100%"}}>
           <Header title={"TEST"} primary={false}></Header>
+          <DashboardScore></DashboardScore>
         </ScrollView>
       </SafeAreaView>
     </View>

@@ -13,7 +13,6 @@ function Header({ title, primary,}) {
     }else{
         return (
             <View style={styles.secondaryHeaderWrapper}>
-                <Button style={}></Button>
                 <Text style={styles.secondaryHeader}>{title}</Text>
             </View>
         );

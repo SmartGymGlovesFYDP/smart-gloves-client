@@ -50,6 +50,4 @@ export default {
     padding: 16,
   },
   //---end of text css---
-
-  //
 };
