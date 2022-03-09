@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import * as firebase from "firebase";
 import { View, Image, StyleSheet } from "react-native";
 import { Rating } from "react-native-rating-element";
 import AppButton from "../components/AppButton";
@@ -9,6 +10,31 @@ import colors from "../config/colors";
 
 export default function ExerciseDetailsScreen({ route }) {
   const exercise = route.params;
+  let temp = "5";
+
+  let currentUserUID = firebase.auth().currentUser.uid;
+
+  //TODO: figure out what is happening using the state hooks
+  const [data, setData] = useState([{}]);
+
+  const getBackendCall = () => {
+    fetch("http://localhost:8000/exerciseData")
+      .then((res) => res.json())
+      .then((temp) => console.log(temp))
+      .catch((err) => console.log(err));
+  };
+
+  const startWorkout = (exercise) => {
+    console.log(exercise);
+
+    const db = firebase.firestore();
+    db.collection("users").doc(currentUserUID).collection("newWorkout").add({
+      workoutName: exercise.title,
+      majorMuscle: exercise.majorMuscle,
+      difficulty: exercise.difficulty,
+      minutes: exercise.minutes,
+    });
+  };
 
   return (
     <View>
@@ -41,7 +67,7 @@ export default function ExerciseDetailsScreen({ route }) {
         width="auto"
         fontWeight="normal"
         color="primary"
-        onPress={() => console.log("To be implemented")}
+        onPress={() => startWorkout(exercise)}
       />
       <View style={styles.userContainer}>
         <ListItem
