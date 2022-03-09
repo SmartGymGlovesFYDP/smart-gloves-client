@@ -21,7 +21,7 @@ function Header({ title, primary,}) {
 
 const styles = StyleSheet.create({
   mainHeaderWrapper:{
-    height: 150,
+    height: 120,
     backgroundColor: colors.whiteP,
     flexDirection: "column-reverse",
   },

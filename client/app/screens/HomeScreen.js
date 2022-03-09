@@ -17,8 +17,7 @@ export default function HomeScreen({ navigation }) {
       <SafeAreaView>
         <Header title={"Dashboard"} primary={true}></Header>
         <ScrollView style={{height:"100%"}}>
-          <Header title={"TEST"} primary={false}></Header>
-          <DashboardScore></DashboardScore>
+          <DashboardScore score={90} rating={4.5} month={"May"} workouts={17} minutes={242}></DashboardScore>
         </ScrollView>
       </SafeAreaView>
     </View>

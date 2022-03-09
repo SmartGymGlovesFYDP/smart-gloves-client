@@ -3,23 +3,23 @@ import {View, StyleSheet,Text} from "react-native";
 import colors from "../config/colors";
 import { Rating } from "react-native-rating-element";
 
-function DashboardScore() {
+function DashboardScore({score,rating,month,workouts,minutes}) {
     return (
         <View style={styles.mainC}>
             <View style={styles.avatarC}></View>
             <Text style={styles.viewBreakDown}>View Breakdown</Text>
-            <Text style={styles.score}>80</Text>
+            <Text style={styles.scoreLabel}>{score}</Text>
             <View style={styles.stars}>
                 <Rating
-                rated={4}
+                rated={rating}
                 size={24}
                 ratingColor={colors.blue3P}
                 />
             </View>
-            <Text style={styles.monthLabel}>June Score</Text>
+            <Text style={styles.monthLabel}>{month} Score</Text>
             <View style={{justifyContent:"space-between", flexDirection:"row"}}>
-                <Text style={styles.workoutLabel}>15 Workouts</Text>
-                <Text style={styles.minutesLabel}>269 Minutes</Text>
+                <Text style={styles.workoutLabel}>{workouts} Workouts</Text>
+                <Text style={styles.minutesLabel}>{minutes} Minutes</Text>
             </View>
         </View>
     );
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         textAlign: "right",
         color: colors.blue3P,
     },
-    score:{
+    scoreLabel:{
         alignSelf: "center",
         top: 50,
         fontStyle: "normal",
