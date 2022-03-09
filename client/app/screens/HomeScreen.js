@@ -1,10 +1,12 @@
 import React, { useEffect, useState, useContext } from "react";
-import { View, Text, StyleSheet, Alert } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View, SafeAreaView, Text, StyleSheet, Alert } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import colors from "../config/colors";
 import { FirebaseContext } from "../api/FirebaseProvider";
 import Screen from "../components/Screen";
 import AppButton from "../components/AppButton";
+import { color } from "react-native-reanimated";
+import Header from "../components/Header";
 
 export default function HomeScreen({ navigation }) {
   const { rawData, getRawData, setRawData, getAllWorkouts, addWorkout } = useContext(FirebaseContext);
@@ -127,27 +129,20 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <Screen style={styles.screen}>
-      <Text style={styles.title}>Home Screen</Text>
-      {/* <AppButton title="Get Data!" color="black" onPress={fetchRawData} /> */}
-      {/* <AppButton title="Reset Data" color="black" onPress={resetRawData} /> */}
-      <AppButton title="Add Workout" color="black" onPress={addNewWorkout} />
-      <AppButton title="Print All Workouts" color="black" onPress={fetchWorkouts}/>
-      <AppButton title="Clear Workout Array" color="black" onPress={clearWorkouts} />
-    </Screen>
+    <View style={styles.container}>
+      <SafeAreaView>
+        <Header title={"Dashboard"} primary={true}></Header>
+        <ScrollView>
+          <Header title={"TEST"} primary={false}></Header>
+        </ScrollView>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    padding: 10,
-    justifyContent: "flex-start",
-    backgroundColor: colors.white,
-  },
-  title: {
-    fontSize: 35,
-    fontWeight: "bold",
-    color: colors.black,
-    textAlign: "center",
+  container:{
+    flex: 1,
+    backgroundColor: colors.whiteP,
   },
 });
