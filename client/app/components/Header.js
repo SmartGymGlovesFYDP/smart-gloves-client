@@ -2,6 +2,7 @@ import React from "react";
 import {View, StyleSheet,Text} from "react-native";
 import { Button } from "react-native-paper";
 import colors from "../config/colors";
+import AppBackButton from "./AppBackButton";
 
 function Header({ title, primary,}) {
     if (primary){
@@ -14,6 +15,7 @@ function Header({ title, primary,}) {
         return (
             <View style={styles.secondaryHeaderWrapper}>
                 <Text style={styles.secondaryHeader}>{title}</Text>
+                <AppBackButton></AppBackButton>
             </View>
         );
     }

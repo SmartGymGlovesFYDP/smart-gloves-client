@@ -22,7 +22,7 @@ export default {
   },
   subHeader: {
     fontSize: 18,
-    fontWeight: "medium",
+    fontWeight: "500",
     color: colors.greyP,
     textAlign: "left",
     display: "flex",
@@ -32,7 +32,7 @@ export default {
 
   primaryText: {
     fontSize: 18,
-    fontWeight: "medium",
+    fontWeight: "500",
     color: colors.black,
     textAlign: "left",
     display: "flex",
@@ -42,7 +42,7 @@ export default {
 
   secondaryText: {
     fontSize: 14,
-    fontWeight: "regular",
+    fontWeight: "normal",
     color: colors.black,
     textAlign: "left",
     display: "flex",

@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.black,
         borderColor: colors.lightGreyP,
         borderRadius: 100,
+        //borderWidth: 0.5,
     },
     viewBreakDown:{
         position: "absolute",
