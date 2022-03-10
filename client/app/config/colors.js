@@ -7,14 +7,16 @@ export default {
   light: "#f8f4f4",
   medium: "#6e6969",
   icewhite: "#fff",
+  red: "#ff453a",
+  green: "#30D158",
+  orange: "#ff8c00",
 
   //Colours from ganan's figma mockup
   whiteP: "#FFFFFF",
-  redP:"#E95050",
+  redP: "#E95050",
   blueP: "#43B0F1",
   blue2P: "#E8EEF1",
   blue3P: "#057DCD",
   lightGreyP: "#CACCCE",
   greyP: "#86888A",
-
 };
