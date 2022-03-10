@@ -13,6 +13,7 @@ import MetricsScreen from "../screens/MetricsScreen";
 // Tab 3: Exercise Screen and child screens
 import ExercisesScreen from "../screens/ExercisesScreen";
 import ExerciseDetailsScreen from "../screens/ExerciseDetailsScreen";
+import AddNewExerciseScreen from "../screens/AddNewExerciseScreen";
 // Tab 4: Profile Screen and child screens
 import ProfileScreen from "../screens/ProfileScreen";
 import ProfileEditScreen from "../screens/ProfileEditScreen";
@@ -63,6 +64,10 @@ const ExercisesStack = ({ navigation }) => (
     <Stack.Screen
       name={PATH.EXERCISE_DETAILS}
       component={ExerciseDetailsScreen}
+    />
+    <Stack.Screen
+      name={PATH.EXERCISE_NEW}
+      component={AddNewExerciseScreen}
     />
     {/* ADD MORE SCREENS AS NECESSARY */}
   </Stack.Navigator>
@@ -117,14 +122,14 @@ function AppNavigator() {
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="shield-search"
+              name="magnify"
               color={color}
               size={size}
             />
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={PATH.METRICS}
         component={MetricsStack}
         options={{
@@ -132,7 +137,7 @@ function AppNavigator() {
             <MaterialCommunityIcons name="axis-arrow" color={color} size={size} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name={PATH.PROFILE}
         component={ProfileStack}

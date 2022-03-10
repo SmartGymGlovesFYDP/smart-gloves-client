@@ -14,6 +14,7 @@ export default Object.freeze({
   // Tab 3: Exercise Screen
   EXERCISES: "Exercises",
   EXERCISE_DETAILS: "ExerciseDetails",
+  EXERCISE_NEW: "ExerciseNew",
   // Tab 4: Profile Screen
   PROFILE: "Profile",
   PROFILE_EDIT: "ProfileEdit",

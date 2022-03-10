@@ -143,7 +143,7 @@ export const FirebaseProvider = ({ children }) => {
     }
   }
 
-  async function addWorkout(obj, userId) {
+  async function addWorkout(obj) {
     try {
       var db = firebase.firestore();
       db.collection("workouts").doc(obj.name)

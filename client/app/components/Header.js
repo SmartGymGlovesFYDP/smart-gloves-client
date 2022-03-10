@@ -4,7 +4,7 @@ import { Button } from "react-native-paper";
 import colors from "../config/colors";
 import AppBackButton from "./AppBackButton";
 
-function Header({ title, primary,}) {
+function Header({ title, primary, navigation, PATH}) {
     if (primary){
         return (
             <View style={styles.mainHeaderWrapper}>
@@ -15,7 +15,7 @@ function Header({ title, primary,}) {
         return (
             <View style={styles.secondaryHeaderWrapper}>
                 <Text style={styles.secondaryHeader}>{title}</Text>
-                <AppBackButton></AppBackButton>
+                <AppBackButton onPress={() => navigation.navigate(PATH)}></AppBackButton>
             </View>
         );
     }

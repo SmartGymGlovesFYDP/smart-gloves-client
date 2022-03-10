@@ -5986,6 +5986,11 @@
     "paths-js" "^0.4.10"
     "point-in-polygon" "^1.0.1"
 
+"react-native-dropdown-picker@^5.3.0":
+  "integrity" "sha512-LUctVMAWiDir1X0WrFX1784psvqzBXRxRujYbvlvKz1Owa6cujrVN98rP356hIXFzX19E7SkbA942fGfMvoEWQ=="
+  "resolved" "https://registry.npmjs.org/react-native-dropdown-picker/-/react-native-dropdown-picker-5.3.0.tgz"
+  "version" "5.3.0"
+
 "react-native-elements@^3.4.1":
   "integrity" "sha512-SPotW75psW1qyZgtiWuiKSTASdd4yNYvf6/vgO6nyl2kEgZG5nP5wtFxL/GsUVxwHh7yc8xnJ3J9pkApa7p9lQ=="
   "resolved" "https://registry.npmjs.org/react-native-elements/-/react-native-elements-3.4.1.tgz"

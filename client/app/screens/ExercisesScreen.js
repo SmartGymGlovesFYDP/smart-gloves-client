@@ -1,88 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { FirebaseContext } from "../api/FirebaseProvider";
 import Card from "../components/Card";
 import Screen from "../components/Screen";
-import AppButton from "../components/AppButton";
+import AddButton from "../components/AddButton";
 import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
 import PATH from "../navigation/Path";
 
 export default function ExercisesScreen({ navigation }) {
-  // NOTE: Ideally this will be the DS used to add a single workout back to the DB
-  // var temp = {
-  //   createdBy: "Smart Gym",
-  //   dateCreated: new Date().toLocaleString(),
-  //   equipment: ["Dumbbells"],
-  //   exerciseType: ["Cardio"],
-  //   gloveSupport: true,
-  //   howToDescription: "To be added",
-  //   majorMuscle: ["Core"],
-  //   minorMuscle: ["N/A"],
-  //   name: "Weighted Punches",
-  //   notes: "",
-  //   userId: ["dSxXdEz906Yso1XK9nTK805XQWA3"],
-  //   variation: [
-  //     { difficulty: 2, minutes: 10, repetition: 10, sets: 3 },
-  //     { difficulty: 4, minutes: 20, repetition: 20, sets: 5 },
-  //     { difficulty: 5, minutes: 30, repetition: 30, sets: 7 },
-  //   ],
-  //   visibility: "public",
-  // };
-
-  // NOTE: Example of an object printed on console
-  // Object {
-  //   "createdBy": "Smart Gym",
-  //   "dateCreated": "Thu Jun 24 14:06:52 2021",
-  //   "equipment": Array [
-  //     "Dumbbells",
-  //   ],
-  //   "exerciseType": Array [
-  //     "Weight",
-  //   ],
-  //   "gloveSupport": true,
-  //   "howToDescription": "To be added",
-  //   "majorMuscle": Array [
-  //     "Arms",
-  //   ],
-  //   "minorMuscle": Array [
-  //     "Bicep",
-  //     "Shoulders",
-  //   ],
-  //   "name": "Arnold Press",
-  //   "notes": "",
-  //   "userId": Array [
-  //     "dSxXdEz906Yso1XK9nTK805XQWA3",
-  //   ],
-  //   "variation": Array [
-  //     Object {
-  //       "difficulty": 2,
-  //       "minutes": 10,
-  //       "repetition": 10,
-  //       "sets": 3,
-  //     },
-  //     Object {
-  //       "difficulty": 4,
-  //       "minutes": 20,
-  //       "repetition": 20,
-  //       "sets": 5,
-  //     },
-  //     Object {
-  //       "difficulty": 5,
-  //       "minutes": 30,
-  //       "repetition": 30,
-  //       "sets": 7,
-  //     },
-  //   ],
-  //   "visibility": "public",
-  // }
-
   // Firebase Context for handling the fetching of the workouts from Firestore DB
   const { rawData, getRawData, setRawData, getAllWorkouts, addWorkout } =
     useContext(FirebaseContext);
 
   // Array of exercise objects
-
   const [workoutsAll, setWorkoutsAll] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -90,7 +21,6 @@ export default function ExercisesScreen({ navigation }) {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [mainDataSource, setMainDataSource] = useState([]);
 
-  // TODO: deserialize JSON response of exercise list from server
   useEffect(() => {
     fetchWorkouts();
   }, []);
@@ -137,6 +67,7 @@ export default function ExercisesScreen({ navigation }) {
       sets: exercise.variation[0].sets,
       reps: exercise.variation[0].repetition,
       majorMuscle: exercise.majorMuscle[0],
+      image: require("../assets/generic.jpeg")
     }));
 
     // console.log("HEREEEE" + JSON.stringify(temp));
@@ -189,11 +120,6 @@ export default function ExercisesScreen({ navigation }) {
         onClear={(text) => searchFilterFunction("")}
         value={search}
       />
-      {/* <AppButton
-        title="Clear Workout Array"
-        color="black"
-        onPress={clearWorkouts}
-      /> */}
       <FlatList
         data={filteredDataSource}
         keyExtractor={(workoutsAll) => workoutsAll.id.toString()}
@@ -201,7 +127,7 @@ export default function ExercisesScreen({ navigation }) {
           <Card
             title={item.title}
             difficulty={item.difficulty}
-            // image={item.image}
+            image={item.image}
             minutes={item.minutes}
             sets={item.sets}
             reps={item.reps}
@@ -209,6 +135,13 @@ export default function ExercisesScreen({ navigation }) {
           />
         )}
       />
+      <View style={styles.buttonView}>
+        <AddButton
+          title="+"
+          color="primary"
+          onPress={() => navigation.navigate(PATH.EXERCISE_NEW)}
+          />
+      </View>
     </Screen>
   );
 }
@@ -225,5 +158,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.black,
     textAlign: "center",
+  },
+  buttonView: {
+    position:"absolute",
+    justifyContent: "flex-end",
+    opacity: 0.9,
+    bottom:25,
+    right:15,
   },
 });
