@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { FirebaseContext } from "../api/FirebaseProvider";
 import Card from "../components/Card";
 import Screen from "../components/Screen";
@@ -67,6 +67,7 @@ export default function ExercisesScreen({ navigation }) {
       sets: exercise.variation[0].sets,
       reps: exercise.variation[0].repetition,
       majorMuscle: exercise.majorMuscle[0],
+      image: require("../assets/generic.jpeg")
     }));
 
     // console.log("HEREEEE" + JSON.stringify(temp));
@@ -119,11 +120,6 @@ export default function ExercisesScreen({ navigation }) {
         onClear={(text) => searchFilterFunction("")}
         value={search}
       />
-      <AddButton
-        title="+"
-        color="black"
-        onPress={() => navigation.navigate(PATH.EXERCISE_NEW)}
-      />
       <FlatList
         data={filteredDataSource}
         keyExtractor={(workoutsAll) => workoutsAll.id.toString()}
@@ -131,7 +127,7 @@ export default function ExercisesScreen({ navigation }) {
           <Card
             title={item.title}
             difficulty={item.difficulty}
-            // image={item.image}
+            image={item.image}
             minutes={item.minutes}
             sets={item.sets}
             reps={item.reps}
@@ -139,6 +135,13 @@ export default function ExercisesScreen({ navigation }) {
           />
         )}
       />
+      <View style={styles.buttonView}>
+        <AddButton
+          title="+"
+          color="primary"
+          onPress={() => navigation.navigate(PATH.EXERCISE_NEW)}
+          />
+      </View>
     </Screen>
   );
 }
@@ -155,5 +158,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: colors.black,
     textAlign: "center",
+  },
+  buttonView: {
+    position:"absolute",
+    justifyContent: "flex-end",
+    opacity: 0.9,
+    bottom:25,
+    right:15,
   },
 });

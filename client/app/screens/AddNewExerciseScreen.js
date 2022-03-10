@@ -256,11 +256,11 @@ export default function AddNewExerciseScreen({ navigation }) {
         </ScrollView>
         <View style={styles.buttonView}>
           <AddButton
-            title="Cancel"
+            title="     Cancel     "
             color="greyP"
             onPress={() => navigation.navigate(PATH.EXERCISES)}
           />
-          <AddButton title="Save" color="blue3P" onPress={submitExercise} />
+          <AddButton title="       Save        " color="blue3P" onPress={submitExercise} />
         </View>
       </View>
     </Screen>

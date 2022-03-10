@@ -79,14 +79,16 @@ function AddButton({
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.primary,
-    borderRadius: 25,
+    borderRadius: 20,
     justifyContent: "center",
     alignItems: "center",
-    padding: 8,
+    padding: 9,
     marginHorizontal: "8%",
     marginVertical: "3%",
     borderColor: colors.black,
     flexDirection: "row",
+    paddingLeft:0,
+    paddingRight:0,
   },
   buttonBorder: {
     backgroundColor: colors.primary,
