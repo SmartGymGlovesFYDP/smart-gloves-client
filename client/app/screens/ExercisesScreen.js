@@ -3,86 +3,17 @@ import { FlatList, StyleSheet } from "react-native";
 import { FirebaseContext } from "../api/FirebaseProvider";
 import Card from "../components/Card";
 import Screen from "../components/Screen";
-import AppButton from "../components/AppButton";
+import AddButton from "../components/AddButton";
 import AppSearchBar from "../components/AppSearchBar";
 import colors from "../config/colors";
 import PATH from "../navigation/Path";
 
 export default function ExercisesScreen({ navigation }) {
-  // NOTE: Ideally this will be the DS used to add a single workout back to the DB
-  // var temp = {
-  //   createdBy: "Smart Gym",
-  //   dateCreated: new Date().toLocaleString(),
-  //   equipment: ["Dumbbells"],
-  //   exerciseType: ["Cardio"],
-  //   gloveSupport: true,
-  //   howToDescription: "To be added",
-  //   majorMuscle: ["Core"],
-  //   minorMuscle: ["N/A"],
-  //   name: "Weighted Punches",
-  //   notes: "",
-  //   userId: ["dSxXdEz906Yso1XK9nTK805XQWA3"],
-  //   variation: [
-  //     { difficulty: 2, minutes: 10, repetition: 10, sets: 3 },
-  //     { difficulty: 4, minutes: 20, repetition: 20, sets: 5 },
-  //     { difficulty: 5, minutes: 30, repetition: 30, sets: 7 },
-  //   ],
-  //   visibility: "public",
-  // };
-
-  // NOTE: Example of an object printed on console
-  // Object {
-  //   "createdBy": "Smart Gym",
-  //   "dateCreated": "Thu Jun 24 14:06:52 2021",
-  //   "equipment": Array [
-  //     "Dumbbells",
-  //   ],
-  //   "exerciseType": Array [
-  //     "Weight",
-  //   ],
-  //   "gloveSupport": true,
-  //   "howToDescription": "To be added",
-  //   "majorMuscle": Array [
-  //     "Arms",
-  //   ],
-  //   "minorMuscle": Array [
-  //     "Bicep",
-  //     "Shoulders",
-  //   ],
-  //   "name": "Arnold Press",
-  //   "notes": "",
-  //   "userId": Array [
-  //     "dSxXdEz906Yso1XK9nTK805XQWA3",
-  //   ],
-  //   "variation": Array [
-  //     Object {
-  //       "difficulty": 2,
-  //       "minutes": 10,
-  //       "repetition": 10,
-  //       "sets": 3,
-  //     },
-  //     Object {
-  //       "difficulty": 4,
-  //       "minutes": 20,
-  //       "repetition": 20,
-  //       "sets": 5,
-  //     },
-  //     Object {
-  //       "difficulty": 5,
-  //       "minutes": 30,
-  //       "repetition": 30,
-  //       "sets": 7,
-  //     },
-  //   ],
-  //   "visibility": "public",
-  // }
-
   // Firebase Context for handling the fetching of the workouts from Firestore DB
   const { rawData, getRawData, setRawData, getAllWorkouts, addWorkout } =
     useContext(FirebaseContext);
 
   // Array of exercise objects
-
   const [workoutsAll, setWorkoutsAll] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -90,7 +21,6 @@ export default function ExercisesScreen({ navigation }) {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [mainDataSource, setMainDataSource] = useState([]);
 
-  // TODO: deserialize JSON response of exercise list from server
   useEffect(() => {
     fetchWorkouts();
   }, []);
@@ -189,11 +119,11 @@ export default function ExercisesScreen({ navigation }) {
         onClear={(text) => searchFilterFunction("")}
         value={search}
       />
-      {/* <AppButton
-        title="Clear Workout Array"
+      <AddButton
+        title="+"
         color="black"
-        onPress={clearWorkouts}
-      /> */}
+        onPress={() => navigation.navigate(PATH.EXERCISE_NEW)}
+      />
       <FlatList
         data={filteredDataSource}
         keyExtractor={(workoutsAll) => workoutsAll.id.toString()}
