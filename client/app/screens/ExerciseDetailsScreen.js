@@ -5,18 +5,17 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Rating } from "react-native-rating-element";
 import Header from "../components/Header";
 import AppButton from "../components/AppButton";
-
+import PATH from "../navigation/Path";
 import AppText from "../components/AppText";
 import ListItem from "../components/lists/ListItem";
 import colors from "../config/colors";
 import styles from "../config/styles";
 import ImageContainer from "../components/ImageContainer";
-import Path from "../navigation/Path";
 import SingleRatingCard from "../components/SingleRatingCard";
 import SummaryCardStars from "../components/SummaryCardStars";
 import SummaryCardText from "../components/SummaryCardText";
 
-export default function ExerciseDetailsScreen({ route }) {
+export default function ExerciseDetailsScreen({ navigation, route }) {
   const exercise = route.params;
   let temp = "5";
 
@@ -47,7 +46,12 @@ export default function ExerciseDetailsScreen({ route }) {
   return (
     <View style={styles2.container}>
       <SafeAreaView backgroundColor={colors.blue2P}>
-        <Header title={exercise.title} primary={false}></Header>
+        <Header
+          title={exercise.title}
+          primary={false}
+          navigation={navigation}
+          PATH={PATH.EXERCISES}
+        ></Header>
         <ScrollView style={{ height: "100%", backgroundColor: colors.whiteP }}>
           <ImageContainer image={exercise.image}></ImageContainer>
           <AppButton

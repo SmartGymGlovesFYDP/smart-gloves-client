@@ -8,6 +8,7 @@ import { Calendar } from "react-native-calendars";
 import KeyLabel from "../components/KeyLabel";
 import defaultStyles from "../config/styles";
 import SimpleCard from "../components/SimpleCard";
+import PATH from "../navigation/Path";
 
 export default function MyProgressScreen({ navigation }) {
   const { getUserWorkoutHistory } = useContext(FirebaseContext);
@@ -147,7 +148,12 @@ export default function MyProgressScreen({ navigation }) {
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
             <Text style={defaultStyles.primaryText}>Overview</Text>
-            <Text style={defaultStyles.onlyTextButton}>Past Workouts</Text>
+            <Text
+              style={defaultStyles.onlyTextButton}
+              onPress={() => navigation.navigate(PATH.MY_WORKOUTS)}
+            >
+              Past Workouts
+            </Text>
           </View>
           <Calendar
             enableSwipeMonths={true}
