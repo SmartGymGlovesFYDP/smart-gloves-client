@@ -36,20 +36,23 @@ export default function MyWorkoutScreen({ navigation, route }) {
     getWorkoutHistory();
   }, []);
 
+  useEffect(() => {
+    populateAllList();
+  }, [workoutHistory]);
+
   const getWorkoutHistory = async () => {
     let workoutHistory = await getUserWorkoutHistory();
     const history = [];
     workoutHistory.docs.map((doc) => {
       // Append the history object to the array
       history.push(doc.data());
-      console.log(JSON.stringify(doc.data()));
+      // console.log(JSON.stringify(doc.data()));
     });
     // console.log("history:", history);
     setWorkoutHistory(history);
-    await populateAllList();
   };
 
-  const populateAllList = async () => {
+  const populateAllList = () => {
     const tmpCurrWeek = [];
     const tmpThisMonth = [];
     const tmpLastMonth = [];
