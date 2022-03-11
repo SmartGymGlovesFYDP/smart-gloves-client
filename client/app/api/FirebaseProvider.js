@@ -146,7 +146,8 @@ export const FirebaseProvider = ({ children }) => {
   async function addWorkout(obj) {
     try {
       var db = firebase.firestore();
-      db.collection("workouts").doc(obj.name)
+      db.collection("workouts")
+        .doc(obj.name)
         .set(obj)
         // .then((docRef) => {
         //   console.log("Document written with ID: ", docRef.id);
@@ -156,6 +157,22 @@ export const FirebaseProvider = ({ children }) => {
         });
     } catch (err) {
       Alert.alert("Failed to add workout!", err.message);
+    }
+  }
+
+  async function getUserWorkoutHistory() {
+    try {
+      const currentUser = firebase.auth().currentUser;
+      let userWorkoutHistory = await firebase
+        .firestore()
+        .collection("users")
+        .doc(currentUser.uid)
+        .collection("workoutHistory")
+        .orderBy("timestamp", "desc")
+        .get();
+      return userWorkoutHistory;
+    } catch (err) {
+      Alert.alert("Failed to get workouts!", err.message);
     }
   }
 
@@ -174,6 +191,7 @@ export const FirebaseProvider = ({ children }) => {
         setRawData,
         getAllWorkouts,
         addWorkout,
+        getUserWorkoutHistory,
       }}
     >
       {children}
