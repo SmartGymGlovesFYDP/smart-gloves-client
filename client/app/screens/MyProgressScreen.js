@@ -15,55 +15,7 @@ export default function MyProgressScreen({ navigation }) {
 
   const [dataMonth, setDataMonth] = useState(3);
   const [workoutHistory, setWorkoutHistory] = useState([]);
-
-  useEffect(() => {
-    getWorkoutHistory();
-  }, []);
-
-  // useEffect(() => {
-  //   updateCalender();
-  // }, [workoutHistory]);
-
-  const getWorkoutHistory = async () => {
-    let workoutHistory = await getUserWorkoutHistory();
-    const history = [];
-    workoutHistory.docs.map((doc) => {
-      // Append the history object to the array
-      history.push(doc.data());
-      // console.log(JSON.stringify(doc.data()));
-    });
-    // console.log("history:", history);
-    setWorkoutHistory(history);
-  };
-
-  const updateCalender = () => {
-    workoutHistory.forEach((h) => {
-      console.log("sec: ", h.timestamp.seconds);
-      const t = new Date(h.timestamp.seconds * 1000);
-      let monthVal = t.getMonth() + 1;
-      if (monthVal <= 9) {
-        monthVal = new String("0", monthVal);
-      } else {
-        monthVal = new String(monthVal);
-      }
-      console.log(monthVal);
-      let dateVal = new String(
-        t.getFullYear(),
-        "-",
-        t.getMonth() + 1,
-        "-",
-        t.getDate()
-      );
-      console.log(t.getDate(), t.getMonth() + 1, t.getFullYear());
-      for (const [key, value] of Object.entries(tempMarkedDates)) {
-        if (key == dateVal) {
-          console.log("Hit");
-        }
-      }
-    });
-  };
-
-  tempMarkedDates = {
+  let tempMarkedDates = {
     "2022-02-04": {
       selected: true,
       selectedColor: colors.green,
@@ -116,10 +68,57 @@ export default function MyProgressScreen({ navigation }) {
       selected: true,
       selectedColor: colors.red,
     },
-    "2022-03-08": {
-      selected: true,
-      selectedColor: colors.green,
-    },
+  };
+  const [markedDates, setMarkedDates] = useState(tempMarkedDates);
+
+  useEffect(() => {
+    getWorkoutHistory();
+  }, []);
+
+  useEffect(() => {
+    updateCalender();
+  }, [workoutHistory]);
+
+  const getWorkoutHistory = async () => {
+    let workoutHistory = await getUserWorkoutHistory();
+    const history = [];
+    workoutHistory.docs.map((doc) => {
+      // Append the history object to the array
+      history.push(doc.data());
+      // console.log(JSON.stringify(doc.data()));
+    });
+    // console.log("history:", history);
+    setWorkoutHistory(history);
+  };
+
+  const updateCalender = () => {
+    const newMarkedDates = {};
+    workoutHistory.forEach((h) => {
+      const t = new Date(h.timestamp.seconds * 1000);
+      let monthVal = t.getMonth() + 1;
+      monthVal =
+        monthVal <= 9 ? "0" + monthVal.toString() : monthVal.toString();
+      let dayVal = t.getDate();
+      dayVal = dayVal <= 9 ? "0" + dayVal.toString() : dayVal.toString();
+      const formattedDate =
+        t.getFullYear().toString() + "-" + monthVal + "-" + dayVal;
+      // console.log(formattedDate);
+      if (h.hasOwnProperty("majorMuscle")) {
+        let col =
+          h.majorMuscle == "Arms"
+            ? colors.orange
+            : h.majorMuscle == "Legs"
+            ? colors.highlight
+            : h.majorMuscle == "Chest"
+            ? colors.green
+            : colors.red;
+        newMarkedDates[formattedDate] = {
+          selected: true,
+          selectedColor: col,
+        };
+      }
+    });
+    setMarkedDates({ ...markedDates, ...newMarkedDates });
   };
 
   // default values
@@ -144,9 +143,10 @@ export default function MyProgressScreen({ navigation }) {
         <ScrollView style={{ height: "100%" }}>
           <Calendar
             enableSwipeMonths={true}
-            markedDates={tempMarkedDates}
+            markedDates={markedDates}
             onMonthChange={(month) => {
               setDataMonth(month.month);
+              updateCalender();
             }}
           />
           <Text style={styles.monthlySummaryText}>Month Summary</Text>
