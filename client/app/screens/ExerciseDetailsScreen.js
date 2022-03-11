@@ -1,12 +1,20 @@
 import React, { useState } from "react";
 import * as firebase from "firebase";
-import { View, Image, StyleSheet } from "react-native";
+import { View, SafeAreaView, Text, Image, StyleSheet } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Rating } from "react-native-rating-element";
+import Header from "../components/Header";
 import AppButton from "../components/AppButton";
 
 import AppText from "../components/AppText";
 import ListItem from "../components/lists/ListItem";
 import colors from "../config/colors";
+import styles from "../config/styles";
+import ImageContainer from "../components/ImageContainer";
+import Path from "../navigation/Path";
+import SingleRatingCard from "../components/SingleRatingCard";
+import SummaryCardStars from "../components/SummaryCardStars";
+import SummaryCardText from "../components/SummaryCardText";
 
 export default function ExerciseDetailsScreen({ route }) {
   const exercise = route.params;
@@ -37,82 +45,70 @@ export default function ExerciseDetailsScreen({ route }) {
   };
 
   return (
-    <View>
-      <Image style={styles.image} source={exercise.image} />
-      <View style={styles.detailsContainer}>
-        <View style={{ flexDirection: "row" }}>
-          <View style={styles.general}>
-            <AppText style={styles.title}>{exercise.title}</AppText>
-            <Rating
-              rated={exercise.rating}
-              size={15}
-              ratingColor={colors.base}
-            />
-          </View>
-          <View style={styles.exerciseDetails}>
-            <AppText style={styles.exerciseDetailsText}>
-              Minutes:{exercise.minutes}
-            </AppText>
-            <AppText style={styles.exerciseDetailsText}>
-              Sets:{exercise.sets}
-            </AppText>
-            <AppText style={styles.exerciseDetailsText}>
-              Reps:{exercise.reps}
-            </AppText>
-          </View>
-        </View>
-      </View>
-      <AppButton
-        title="Start Workout"
-        width="auto"
-        fontWeight="normal"
-        color="primary"
-        onPress={() => startWorkout(exercise)}
-      />
-      <View style={styles.userContainer}>
-        <ListItem
-          image={require("../assets/icon.png")}
-          title="Vignesh Ravindran"
-          subTitle="5/5 highly recommend it"
-        />
-      </View>
+    <View style={styles2.container}>
+      <SafeAreaView backgroundColor={colors.blue2P}>
+        <Header title={exercise.title} primary={false}></Header>
+        <ScrollView style={{ height: "100%", backgroundColor: colors.whiteP }}>
+          <ImageContainer image={exercise.image}></ImageContainer>
+          <AppButton
+            title="Start Workout"
+            width="auto"
+            fontWeight="normal"
+            color="primary"
+            onPress={() => startWorkout(exercise)}
+          />
+          <Text style={styles.subHeader}>Description</Text>
+          <Text style={styles2.secondaryText}>{exercise.description}</Text>
+          <Text style={styles.subHeader}>Summary</Text>
+          <SummaryCardStars
+            name="Difficulty"
+            rating={exercise.difficulty}
+          ></SummaryCardStars>
+          <SummaryCardText
+            name="Category"
+            rating={exercise.majorMuscle}
+          ></SummaryCardText>
+          <SummaryCardText
+            name="Minutes"
+            rating={exercise.minutes}
+            units="Minutes"
+          ></SummaryCardText>
+          <Text style={styles.subHeader}>My History</Text>
+          <SingleRatingCard
+            name={"March 9, 2022"}
+            rating={3}
+          ></SingleRatingCard>
+          <SingleRatingCard
+            name={"March 5, 2022"}
+            rating={5}
+          ></SingleRatingCard>
+          <SingleRatingCard
+            name={"March 2, 2022"}
+            rating={4.5}
+          ></SingleRatingCard>
+          <SingleRatingCard
+            name={"Febuary 27, 2022"}
+            rating={5}
+          ></SingleRatingCard>
+          <View style={{ height: 120 }}></View>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  detailsContainer: {
-    padding: 20,
+const styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.whiteP,
   },
-  exerciseDetails: {
-    flex: 0.25,
+  secondaryText: {
+    fontSize: 14,
+    fontWeight: "normal",
+    color: colors.black,
+    textAlign: "left",
+    display: "flex",
     alignItems: "flex-end",
-    paddingTop: "0.6%",
-  },
-  exerciseDetailsText: {
-    fontSize: 10,
-    color: colors.highlight,
-    textAlign: "right",
-  },
-  general: {
-    flex: 0.75,
-  },
-  image: {
-    width: "100%",
-    height: 300,
-  },
-  rating: {
-    color: colors.secondary,
-    fontWeight: "bold",
-    fontSize: 20,
-    marginVertical: 10,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "500",
-  },
-  userContainer: {
-    marginVertical: 40,
-    backgroundColor: colors.medium,
+    marginHorizontal: 16,
   },
 });
