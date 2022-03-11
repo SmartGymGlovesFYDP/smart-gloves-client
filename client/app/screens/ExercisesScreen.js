@@ -67,7 +67,8 @@ export default function ExercisesScreen({ navigation }) {
       sets: exercise.variation[0].sets,
       reps: exercise.variation[0].repetition,
       majorMuscle: exercise.majorMuscle[0],
-      image: require("../assets/generic.jpeg")
+      image: require("../assets/generic.jpeg"),
+      description: exercise.howToDescription,
     }));
 
     // console.log("HEREEEE" + JSON.stringify(temp));
@@ -140,7 +141,7 @@ export default function ExercisesScreen({ navigation }) {
           title="+"
           color="primary"
           onPress={() => navigation.navigate(PATH.EXERCISE_NEW)}
-          />
+        />
       </View>
     </Screen>
   );
@@ -160,10 +161,10 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   buttonView: {
-    position:"absolute",
+    position: "absolute",
     justifyContent: "flex-end",
     opacity: 0.9,
-    bottom:25,
-    right:15,
+    bottom: 25,
+    right: 15,
   },
 });

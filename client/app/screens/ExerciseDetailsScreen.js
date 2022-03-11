@@ -47,22 +47,50 @@ export default function ExerciseDetailsScreen({ route }) {
   return (
     <View style={styles2.container}>
       <SafeAreaView backgroundColor={colors.blue2P}>
-      <Header title={exercise.title} primary={false}></Header>
-      <ScrollView style={{height:"100%", backgroundColor:colors.whiteP}}>
-          <ImageContainer image={"../assets/generic.jpeg"}></ImageContainer>
+        <Header title={exercise.title} primary={false}></Header>
+        <ScrollView style={{ height: "100%", backgroundColor: colors.whiteP }}>
+          <ImageContainer image={exercise.image}></ImageContainer>
+          <AppButton
+            title="Start Workout"
+            width="auto"
+            fontWeight="normal"
+            color="primary"
+            onPress={() => startWorkout(exercise)}
+          />
           <Text style={styles.subHeader}>Description</Text>
-          <Text style={styles2.secondaryText}>Jumping Jacks are easy and simple to do. First start with you hands by your side standing straight, then jump into a star pose and jump back. That's it!</Text>
+          <Text style={styles2.secondaryText}>{exercise.description}</Text>
           <Text style={styles.subHeader}>Summary</Text>
-          <SummaryCardStars name="Difficulty" rating={exercise.difficulty}></SummaryCardStars>
-          <SummaryCardText name="Category" rating={exercise.majorMuscle}></SummaryCardText>
-          <SummaryCardText name="Minutes" rating={exercise.minutes} units="Minutes"></SummaryCardText>
+          <SummaryCardStars
+            name="Difficulty"
+            rating={exercise.difficulty}
+          ></SummaryCardStars>
+          <SummaryCardText
+            name="Category"
+            rating={exercise.majorMuscle}
+          ></SummaryCardText>
+          <SummaryCardText
+            name="Minutes"
+            rating={exercise.minutes}
+            units="Minutes"
+          ></SummaryCardText>
           <Text style={styles.subHeader}>My History</Text>
-          <SingleRatingCard name={"March 9, 2022"} rating={3}></SingleRatingCard>
-          <SingleRatingCard name={"March 5, 2022"} rating={5}></SingleRatingCard>
-          <SingleRatingCard name={"March 2, 2022"} rating={4.5}></SingleRatingCard>
-          <SingleRatingCard name={"Febuary 27, 2022"} rating={5}></SingleRatingCard>
-          <View style={{height:120}}></View>
-
+          <SingleRatingCard
+            name={"March 9, 2022"}
+            rating={3}
+          ></SingleRatingCard>
+          <SingleRatingCard
+            name={"March 5, 2022"}
+            rating={5}
+          ></SingleRatingCard>
+          <SingleRatingCard
+            name={"March 2, 2022"}
+            rating={4.5}
+          ></SingleRatingCard>
+          <SingleRatingCard
+            name={"Febuary 27, 2022"}
+            rating={5}
+          ></SingleRatingCard>
+          <View style={{ height: 120 }}></View>
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -70,7 +98,7 @@ export default function ExerciseDetailsScreen({ route }) {
 }
 
 const styles2 = StyleSheet.create({
-  container:{
+  container: {
     flex: 1,
     backgroundColor: colors.whiteP,
   },
