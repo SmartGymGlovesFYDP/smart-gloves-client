@@ -7,6 +7,9 @@ import colors from "../config/colors";
 import PATH from "./Path";
 // Tab 1: Home Screen and child screens
 import HomeScreen from "../screens/HomeScreen";
+import ExerciseHistoryDetailsScreen from "../screens/ExerciseHistoryDetailsScreen";
+import ExerciseHistoryScreen from "../screens/ExerciseHistoryScreen";
+import MyWorkoutScreen from "../screens/MyWorkoutScreen";
 // Tab 2: My Progress Screen and child screens
 import MyProgressScreen from "../screens/MyProgressScreen";
 import MetricsScreen from "../screens/MetricsScreen";
@@ -28,20 +31,35 @@ const HomeStack = ({ navigation }) => (
       component={HomeScreen}
       options={{ headerShown: false }}
     />
-    {/* ADD MORE SCREENS AS NECESSARY */}
-  </Stack.Navigator>
-);
-
-const MetricsStack = ({ navigation }) => (
-  <Stack.Navigator>
     <Stack.Screen
-      name={PATH.METRICS}
-      component={MetricsScreen}
+      name={PATH.MY_WORKOUTS}
+      component={MyWorkoutScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={PATH.EXERCISE_HISTORY}
+      component={ExerciseHistoryScreen}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name={PATH.EXERCISE_HISTORY_DETAILS}
+      component={ExerciseHistoryDetailsScreen}
       options={{ headerShown: false }}
     />
     {/* ADD MORE SCREENS AS NECESSARY */}
   </Stack.Navigator>
 );
+
+// const MetricsStack = ({ navigation }) => (
+//   <Stack.Navigator>
+//     <Stack.Screen
+//       name={PATH.METRICS}
+//       component={MetricsScreen}
+//       options={{ headerShown: false }}
+//     />
+//     {/* ADD MORE SCREENS AS NECESSARY */}
+//   </Stack.Navigator>
+// );
 
 const MyProgressStack = ({ navigation }) => (
   <Stack.Navigator>
