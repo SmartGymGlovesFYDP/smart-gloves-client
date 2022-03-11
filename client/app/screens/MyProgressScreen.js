@@ -1,15 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { View, SafeAreaView, Text, StyleSheet } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { FirebaseContext } from "../api/FirebaseProvider";
 import colors from "../config/colors";
 import Header from "../components/Header";
 import { Calendar } from "react-native-calendars";
-import FriendCard from "../components/FriendCard";
 import KeyLabel from "../components/KeyLabel";
 import defaultStyles from "../config/styles";
 import SimpleCard from "../components/SimpleCard";
+import { date } from "yup";
 
 export default function MyProgressScreen({ navigation }) {
+  const { getUserWorkoutHistory } = useContext(FirebaseContext);
+
+  const [dataMonth, setDataMonth] = useState(3);
+  const [workoutHistory, setWorkoutHistory] = useState([]);
+
+  useEffect(() => {
+    getWorkoutHistory();
+  }, []);
+
+  // useEffect(() => {
+  //   updateCalender();
+  // }, [workoutHistory]);
+
+  const getWorkoutHistory = async () => {
+    let workoutHistory = await getUserWorkoutHistory();
+    const history = [];
+    workoutHistory.docs.map((doc) => {
+      // Append the history object to the array
+      history.push(doc.data());
+      // console.log(JSON.stringify(doc.data()));
+    });
+    // console.log("history:", history);
+    setWorkoutHistory(history);
+  };
+
+  const updateCalender = () => {
+    workoutHistory.forEach((h) => {
+      console.log("sec: ", h.timestamp.seconds);
+      const t = new Date(h.timestamp.seconds * 1000);
+      let monthVal = t.getMonth() + 1;
+      if (monthVal <= 9) {
+        monthVal = new String("0", monthVal);
+      } else {
+        monthVal = new String(monthVal);
+      }
+      console.log(monthVal);
+      let dateVal = new String(
+        t.getFullYear(),
+        "-",
+        t.getMonth() + 1,
+        "-",
+        t.getDate()
+      );
+      console.log(t.getDate(), t.getMonth() + 1, t.getFullYear());
+      for (const [key, value] of Object.entries(tempMarkedDates)) {
+        if (key == dateVal) {
+          console.log("Hit");
+        }
+      }
+    });
+  };
+
   tempMarkedDates = {
     "2022-02-04": {
       selected: true,
@@ -68,18 +121,56 @@ export default function MyProgressScreen({ navigation }) {
       selectedColor: colors.green,
     },
   };
+
+  // default values
+  const countFeb = [4, 2, 3, 2];
+  const countMarch = [1, 1, 1, 0];
+  let countWorkouts = countMarch;
+  const setWorkoutsCount = (month, type) => {
+    if (month == 2) {
+      countWorkouts = countFeb;
+    } else if (month == 3) {
+      countWorkouts = countMarch;
+    } else {
+      countWorkouts = [0, 0, 0, 0];
+    }
+    return countWorkouts[type];
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <Header title={"Progress"} primary={true} />
         <ScrollView style={{ height: "100%" }}>
-          <Calendar enableSwipeMonths={true} markedDates={tempMarkedDates} />
+          <Calendar
+            enableSwipeMonths={true}
+            markedDates={tempMarkedDates}
+            onMonthChange={(month) => {
+              setDataMonth(month.month);
+            }}
+          />
           <Text style={styles.monthlySummaryText}>Month Summary</Text>
           <ScrollView style={styles.scrollHor} horizontal={true}>
-            <KeyLabel backgroundColor={colors.red} title={"Cardio Days"} />
-            <KeyLabel backgroundColor={colors.green} title={"Chest Days"} />
-            <KeyLabel backgroundColor={colors.highlight} title={"Leg Days"} />
-            <KeyLabel backgroundColor={colors.orange} title={"Arms Days"} />
+            <KeyLabel
+              backgroundColor={colors.red}
+              title={"Cardio Days"}
+              number={setWorkoutsCount(dataMonth, 0)}
+            />
+            <KeyLabel
+              backgroundColor={colors.green}
+              title={"Chest Days"}
+              number={countWorkouts[1]}
+            />
+            <KeyLabel
+              backgroundColor={colors.highlight}
+              title={"Leg Days"}
+              number={countWorkouts[2]}
+            />
+            <KeyLabel
+              backgroundColor={colors.orange}
+              title={"Arms Days"}
+              number={countWorkouts[3]}
+            />
           </ScrollView>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
