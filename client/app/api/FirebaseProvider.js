@@ -168,6 +168,7 @@ export const FirebaseProvider = ({ children }) => {
         .collection("users")
         .doc(currentUser.uid)
         .collection("workoutHistory")
+        .orderBy("timestamp", "desc")
         .get();
       return userWorkoutHistory;
     } catch (err) {

@@ -9,6 +9,9 @@ export default Object.freeze({
   // Tab 1: Home Screen
   HOME: "Home",
   METRICS: "Metrics",
+  MY_WORKOUTS: "MyWorkouts",
+  EXERCISE_HISTORY: "ExerciseHistory",
+  EXERCISE_HISTORY_DETAILS: "ExerciseHistoryDetails",
   // Tab 2: MyProgress Screen
   MYPROGRESS: "Progress",
   // Tab 3: Exercise Screen
