@@ -143,6 +143,12 @@ export default function MyProgressScreen({ navigation }) {
       <SafeAreaView>
         <Header title={"Progress"} primary={true} />
         <ScrollView style={{ height: "100%" }}>
+          <View
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Text style={defaultStyles.primaryText}>Overview</Text>
+            <Text style={defaultStyles.onlyTextButton}>Past Workouts</Text>
+          </View>
           <Calendar
             enableSwipeMonths={true}
             markedDates={markedDates}
@@ -151,7 +157,7 @@ export default function MyProgressScreen({ navigation }) {
               updateCalender();
             }}
           />
-          <Text style={styles.monthlySummaryText}>Month Summary</Text>
+          <Text style={styles.monthlySummaryText}>Monthly Summary</Text>
           <ScrollView style={styles.scrollHor} horizontal={true}>
             <KeyLabel backgroundColor={colors.red} title={"Cardio Days"} />
             <KeyLabel backgroundColor={colors.green} title={"Chest Days"} />
