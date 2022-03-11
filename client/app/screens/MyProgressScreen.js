@@ -8,7 +8,6 @@ import { Calendar } from "react-native-calendars";
 import KeyLabel from "../components/KeyLabel";
 import defaultStyles from "../config/styles";
 import SimpleCard from "../components/SimpleCard";
-import { date } from "yup";
 
 export default function MyProgressScreen({ navigation }) {
   const { getUserWorkoutHistory } = useContext(FirebaseContext);
@@ -100,9 +99,11 @@ export default function MyProgressScreen({ navigation }) {
         monthVal <= 9 ? "0" + monthVal.toString() : monthVal.toString();
       let dayVal = t.getDate();
       dayVal = dayVal <= 9 ? "0" + dayVal.toString() : dayVal.toString();
+
       const formattedDate =
         t.getFullYear().toString() + "-" + monthVal + "-" + dayVal;
       // console.log(formattedDate);
+
       if (h.hasOwnProperty("majorMuscle")) {
         let col =
           h.majorMuscle == "Arms"
@@ -118,6 +119,7 @@ export default function MyProgressScreen({ navigation }) {
         };
       }
     });
+
     setMarkedDates({ ...markedDates, ...newMarkedDates });
   };
 
@@ -151,26 +153,10 @@ export default function MyProgressScreen({ navigation }) {
           />
           <Text style={styles.monthlySummaryText}>Month Summary</Text>
           <ScrollView style={styles.scrollHor} horizontal={true}>
-            <KeyLabel
-              backgroundColor={colors.red}
-              title={"Cardio Days"}
-              number={setWorkoutsCount(dataMonth, 0)}
-            />
-            <KeyLabel
-              backgroundColor={colors.green}
-              title={"Chest Days"}
-              number={countWorkouts[1]}
-            />
-            <KeyLabel
-              backgroundColor={colors.highlight}
-              title={"Leg Days"}
-              number={countWorkouts[2]}
-            />
-            <KeyLabel
-              backgroundColor={colors.orange}
-              title={"Arms Days"}
-              number={countWorkouts[3]}
-            />
+            <KeyLabel backgroundColor={colors.red} title={"Cardio Days"} />
+            <KeyLabel backgroundColor={colors.green} title={"Chest Days"} />
+            <KeyLabel backgroundColor={colors.highlight} title={"Leg Days"} />
+            <KeyLabel backgroundColor={colors.orange} title={"Arm Days"} />
           </ScrollView>
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
