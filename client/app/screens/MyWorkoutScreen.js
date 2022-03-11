@@ -103,7 +103,7 @@ export default function MyWorkoutScreen({ navigation, route }) {
     setPrevious(tmpPrevious);
 
     if (tmpCurrWeekScore > 0) {
-      setCurrWeekScore(tmpCurrWeekScore / currWeek.length);
+      setCurrWeekScore(tmpCurrWeekScore / tmpCurrWeek.length);
       if (currWeekScore >= 90) {
         setCurrWeekStar(5.0);
       } else if (currWeekScore >= 80) {
@@ -127,7 +127,7 @@ export default function MyWorkoutScreen({ navigation, route }) {
       }
     }
     if (tmpThisMonthScore > 0) {
-      setThisMonthScore(tmpThisMonthScore / thisMonth.length);
+      setThisMonthScore(tmpThisMonthScore / tmpThisMonth.length);
       if (thisMonthScore >= 90) {
         setThisMonthStar(5.0);
       } else if (thisMonthScore >= 80) {
@@ -151,7 +151,7 @@ export default function MyWorkoutScreen({ navigation, route }) {
       }
     }
     if (tmpLastMonthScore > 0) {
-      setLastMonthScore(tmpLastMonthScore / lastMonth.length);
+      setLastMonthScore(tmpLastMonthScore / tmpLastMonth.length);
       if (lastMonthScore >= 90) {
         setLastMonthStar(5.0);
       } else if (lastMonthScore >= 80) {
@@ -175,7 +175,7 @@ export default function MyWorkoutScreen({ navigation, route }) {
       }
     }
     if (tmpPreviousScore > 0) {
-      setPreviousScore(tmpPreviousScore / previous.length);
+      setPreviousScore(tmpPreviousScore / tmpPrevious.length);
       if (previousScore >= 90) {
         setPreviousStar(5.0);
       } else if (previousScore >= 80) {
@@ -199,18 +199,18 @@ export default function MyWorkoutScreen({ navigation, route }) {
       }
     }
 
-    console.log(
-      "Current Week Workouts = " + currWeek + " SCORE = " + currWeekScore
-    );
-    console.log(
-      "Current Month Workouts = " + thisMonth + " SCORE = " + thisMonthScore
-    );
-    console.log(
-      "Last Month Workouts = " + lastMonth + " SCORE = " + lastMonthScore
-    );
-    console.log(
-      "Previous Workouts = " + previous + " SCORE = " + previousScore
-    );
+    // console.log(
+    //   "Current Week Workouts = " + currWeek + " SCORE = " + currWeekScore
+    // );
+    // console.log(
+    //   "Current Month Workouts = " + thisMonth + " SCORE = " + thisMonthScore
+    // );
+    // console.log(
+    //   "Last Month Workouts = " + lastMonth + " SCORE = " + lastMonthScore
+    // );
+    // console.log(
+    //   "Previous Workouts = " + previous + " SCORE = " + previousScore
+    // );
   };
 
   let currWeekData = currWeek.map((exercise, index) => ({

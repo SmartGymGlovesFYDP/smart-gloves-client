@@ -35,8 +35,8 @@ export default function HomeScreen({ navigation }) {
             </ScrollView>
             <View style={{flexDirection:"row", justifyContent:"space-between",}}>
               <Text style={styles.primaryText}>My Recent Workouts</Text>
-              {/* <Text style={styles.onlyTextButton}>View All</Text> */}
-              <Button style={styles2.viewAllButton} title="View All" onPress={() => navigation.navigate(PATH.MY_WORKOUTS)}/>
+              <Text style={styles.onlyTextButton} onPress={() => navigation.navigate(PATH.MY_WORKOUTS)}>View All</Text>
+              {/* <Button style={styles2.viewAllButton} title="View All" onPress={() => navigation.navigate(PATH.MY_WORKOUTS)}/> */}
             </View>
             <SingleRatingCard name={"March 10, 2022"} rating={5}></SingleRatingCard>
             <SingleRatingCard name={"March 8, 2022"} rating={5}></SingleRatingCard>
